@@ -1,5 +1,6 @@
 package Application
 
+import Application.model.ListaDeCandidatos
 import Application.model.PessoaFisica
 import Application.model.PessoaJuridica
 import groovy.json.JsonBuilder
@@ -43,6 +44,8 @@ class Application {
                     "descricao sample da Liana",
                     ["Python" : "Avançado", "Java": "Avançado", "Spring Framework" : "Básico", "Angular" : "Intermediario"]),
         ]
+
+        ListaDeCandidatos listaDeCandidatos = new ListaDeCandidatos(candidatos);
 
         List empresas = [
                 new PessoaJuridica("Farmacia",
