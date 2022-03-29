@@ -11,14 +11,54 @@
       rel="stylesheet"
     />
 
-    <link rel="stylesheet" src="estilos/home.css" />
+    <link rel="stylesheet" href="estilos/home.css" />
+    <link rel="stylesheet" href="estilos/reset.css" />
+    <script defer src="app.min.js"></script>
     <title>Linketinder</title>
   </head>
   <body>
     <header></header>
     <nav class="container-flex">
-      <a class="container-link" href="#areaCandidato">Sou candidato!</a>
-      <a class="container-link" href="#areaEmpresa">Sou contratante!</a>
+      <div class="container-card">
+        <h3 class="titulo-card">Sou candidato!</h3>
+        <div class="card">
+          <form>
+            <label for="nome">Nome</label>
+            <input
+              name="nome"
+              id="nomeCandidato"
+              class="input-text"
+              type="text"
+            />
+            <label for="email">E-mail</label>
+            <input name="email" id="emailCandidato" class="input-text" type="text" />
+            <label for="cpf">CPF</label>
+            <input name="cpf" id="cpf" class="input-text" type="text" />
+            <label for="senha">Senha</label>
+            <input name="senha" id="senhaCandidato" class="input-text" type="password" />
+          </form>
+          <button id="btn-submit-cpf" ">Criar Conta!</button>
+          <a href="paginas/candidato.html">Já possui uma conta?</a>
+        </div>
+      </div>
+      <div class="container-card">
+        <h3 class="titulo-card">Sou contratante!</h3>
+        <div class="card">
+          <form>
+            <label for="nome">Nome</label>
+            <input name="nome" id="nomeEmpresa" class="input-text" type="text" />
+            <label for="email">E-mail</label>
+            <input name="email" id="emailEmpresa" class="input-text" type="text" />
+            <label for="cnpj">CNPJ</label>
+            <input name="cnpj" id="cnpj" class="input-text" type="text" />
+            <label for="senha">Senha</label>
+            <input name="senha" id="senhaEmpresa" class="input-text" type="password" />
+          </form>
+          <button id="btn-submit-cnpj" type="submit">Criar Conta!</button>
+
+          <a href="paginas/empresas.html">Já possui uma conta?</a>
+        </div>
+      </div>
     </nav>
     <!-- home, cadastro candidato, cadastro empresa, perfil de empresa e perfil de candidato -->
   </body>

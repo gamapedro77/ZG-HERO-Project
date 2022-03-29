@@ -1,9 +1,13 @@
 const path = require("path");
 const CopyPLugin = require("copy-webpack-plugin");
+const { webpack } = require("webpack");
 
 module.exports = {
   mode: "production",
-  entry: "./src/app.ts",
+  entry: {
+    app: "./src/app.ts",
+    "perfil-empresa": "./src/perfil-empresa.ts",
+  },
   devServer: {
     static: path.join(__dirname, "out"),
     port: 3000,
@@ -11,7 +15,7 @@ module.exports = {
     liveReload: true,
   },
   output: {
-    filename: "app.min.js",
+    filename: "[name].min.js",
     path: path.join(__dirname, "out"),
   },
   plugins: [
