@@ -30,7 +30,7 @@ class Home {
     // Salvando no local storage
     // Implementar conexão com o back-end aqui:
     const candidatos: Array<Object> = localStorage.getItem("candidatos")
-      ? JSON.parse(localStorage.users)
+      ? JSON.parse(localStorage.candidatos)
       : [];
 
     localStorage.setItem(
@@ -64,7 +64,7 @@ class Home {
     // Implementar conexão com o back-end aqui:
 
     const empresas: Array<Object> = localStorage.getItem("empresas")
-      ? JSON.parse(localStorage.users)
+      ? JSON.parse(localStorage.empresas)
       : [];
 
     localStorage.setItem(

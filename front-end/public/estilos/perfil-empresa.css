@@ -65,7 +65,7 @@ body {
 .highcharts-data-table caption {
   padding: 1em 0;
   font-size: 1.2em;
-  color: #555;
+  color: #fff;
 }
 
 .highcharts-data-table th {
@@ -81,9 +81,54 @@ body {
 
 .highcharts-data-table thead tr,
 .highcharts-data-table tr:nth-child(even) {
-  background: #f8f8f8;
+  background: transparent;
 }
 
 .highcharts-data-table tr:hover {
-  background: #f1f7ff;
+  background: #000;
+}
+
+.highcharts-background {
+  fill: rgba(0, 0, 0, 0);
+}
+
+/* Using important keyword here because for some reason highcharts used inline css for the text color and fill */
+text {
+  color: black !important;
+  fill: black !important;
+}
+
+.lista-usuarios {
+  list-style: none;
+  margin: 0;
+  display: inline-block;
+  padding: 0;
+  width: 100%;
+}
+
+.usuario {
+  border: 1px solid black;
+  border-radius: 8px;
+  background: #c0a0f8;
+  width: 100%;
+  margin: 18px;
+  box-shadow: 3px 5px 5px rgba(0, 0, 0, 0.3);
+}
+
+.lista-skills {
+  list-style: none;
+  margin: 0;
+  display: flex;
+  padding: 0;
+  width: 100%;
+
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.skill-item {
+  margin: 8px;
+}
+li h3 {
+  margin: 8px;
 }

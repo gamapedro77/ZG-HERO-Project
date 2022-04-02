@@ -3,6 +3,7 @@
   flex-direction: row;
   justify-content: center;
   width: 40%;
+  min-width: 600px;
   margin: 0 auto;
 
   height: 100vh;
