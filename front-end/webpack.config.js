@@ -7,6 +7,9 @@ module.exports = {
   entry: {
     app: "./src/app.ts",
     "perfil-empresa": "./src/perfil-empresa.ts",
+    "login-candidato": "./src/login-candidato.ts",
+    "login-empresa": "./src/login-empresa.ts",
+    "perfil-candidato": "./src/perfil-candidato.ts",
   },
   devServer: {
     static: path.join(__dirname, "out"),
