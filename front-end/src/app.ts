@@ -26,7 +26,31 @@ class Home {
     const Senha: string | null = (<HTMLInputElement>(
       document.getElementById("senhaCandidato")
     )).value;
+    
+    const regexNome : RegExp = /[a-zA-Z]{1,36}/g;
 
+    if(!Nome.match(regexNome)) {
+      alert("Nome invalido, Nome deve conter apenas letras")
+      return {};
+    }
+
+    const regexEmail: RegExp = /[\w._%+-]+@[\w.-]+\.[a-zA-Z]{1,4}/g; 
+    if (!Email.match(regexEmail)){
+      alert("Email invalido!")
+      return {};
+    }
+
+    const regexCpf: RegExp = /[1-9]{3}\.[1-9]{3}\.[1-9]{3}-[0-9]{2}/
+    if (!CPF.match(regexCpf)){
+      alert("CPF Invalido! Cpf deve seguir o formato: 000.000.000-00")
+      return {};
+    }
+
+    const regexSenha: RegExp = /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}/
+    if (!Senha.match(regexSenha)){
+      alert("Senha invalida! Senha deve conter letras maiusculas e minusculas e no minimo um numero")
+      return {};
+    }
     // Salvando no local storage
     // Implementar conexão com o back-end aqui:
     const candidatos: Array<Object> = localStorage.getItem("candidatos")
@@ -60,6 +84,29 @@ class Home {
       document.getElementById("senhaEmpresa")
     )).value;
 
+    const regexNome : RegExp = /[a-zA-Z]{1,36}/g;
+    if(!Nome.match(regexNome)) {
+      alert("Nome invalido, Nome deve conter apenas letras")
+      return {};
+    }
+
+    const regexEmail: RegExp = /[\w._%+-]+@[\w.-]+\.[a-zA-Z]{1,4}/g; 
+    if (!Email.match(regexEmail)){
+      alert("Email invalido!")
+      return {};
+    }
+
+    const regexCnpj: RegExp = /[1-9]{2}\.[1-9]{3}\.[1-9]{3}\/0001-[0-9]{2}/
+    if (!CNPJ.match(regexCnpj)){
+      alert("CNPJ Invalido! Cnpj deve seguir o formato: 00.000.000/0001-00")
+      return {};
+    }
+
+    const regexSenha: RegExp = /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}/
+    if (!Senha.match(regexSenha)){
+      alert("Senha invalida! Senha deve conter letras maiusculas e minusculas e no minimo um numero")
+      return {};
+    }
     // Salvando no local storage
     // Implementar conexão com o back-end aqui:
 
