@@ -54,5 +54,12 @@ CREATE TABLE curtidas(
 	empresa BOOLEAN NOT NULL
 );
 
+INSERT INTO candidatos (nome, sobrenome, data_nascimento, email, CPF, pais, CEP, descricao, senha)
+	VALUES ('Joao', 'Alberto', '1999-08-10', 'joao@email.com', '11122233345', 'Brasil', '12345678', 'Programador', 'poxavida24');
+	
+INSERT INTO empresas (nome, CNPJ, email, descricao, pais, CEP, senha)
+	VALUES ('Tecnologia LTDA', '11222333444566', 'tecnologia@email.com', 'empresa de tecnologia', 'Brasil', '12345678', 'olhaquelegal38');
 
 
+SELECT * FROM candidatos;
+SELECT * FROM empresas;
