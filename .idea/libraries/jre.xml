@@ -1,31 +1,9 @@
 <component name="libraryTable">
   <library name="jre">
     <CLASSES>
-      <root url="file:////wsl$/Ubuntu/home/pedroca/.asdf/installs/java/zulu-8.56.0.21/jre" />
+      <root url="file://$USER_HOME$/.asdf/installs/java/openjdk-16.0.1" />
     </CLASSES>
     <JAVADOC />
-    <NATIVE>
-      <root url="file:////wsl$/Ubuntu/home/pedroca/.asdf/installs/java/zulu-8.56.0.21/jre" />
-    </NATIVE>
-    <SOURCES>
-      <root url="file:////wsl$/Ubuntu/home/pedroca/.asdf/installs/java/zulu-8.56.0.21" />
-      <root url="file:////wsl$/Ubuntu/home/pedroca/.asdf/installs/java/zulu-8.56.0.21/demo/nio/zipfs" />
-      <root url="file:////wsl$/Ubuntu/home/pedroca/.asdf/installs/java/zulu-8.56.0.21/sample/annotations/DependencyChecker/PluginChecker/src" />
-      <root url="file:////wsl$/Ubuntu/home/pedroca/.asdf/installs/java/zulu-8.56.0.21/sample/annotations/DependencyChecker/Plugins/src" />
-      <root url="file:////wsl$/Ubuntu/home/pedroca/.asdf/installs/java/zulu-8.56.0.21/sample/annotations/Validator/src" />
-      <root url="file:////wsl$/Ubuntu/home/pedroca/.asdf/installs/java/zulu-8.56.0.21/sample/forkjoin/mergesort" />
-      <root url="file:////wsl$/Ubuntu/home/pedroca/.asdf/installs/java/zulu-8.56.0.21/sample/jmx/jmx-scandir/src" />
-      <root url="file:////wsl$/Ubuntu/home/pedroca/.asdf/installs/java/zulu-8.56.0.21/sample/jmx/jmx-scandir/test" />
-      <root url="file:////wsl$/Ubuntu/home/pedroca/.asdf/installs/java/zulu-8.56.0.21/sample/lambda/BulkDataOperations/src" />
-      <root url="file:////wsl$/Ubuntu/home/pedroca/.asdf/installs/java/zulu-8.56.0.21/sample/lambda/DefaultMethods" />
-      <root url="file:////wsl$/Ubuntu/home/pedroca/.asdf/installs/java/zulu-8.56.0.21/sample/nio/chatserver" />
-      <root url="file:////wsl$/Ubuntu/home/pedroca/.asdf/installs/java/zulu-8.56.0.21/sample/nio/file" />
-      <root url="file:////wsl$/Ubuntu/home/pedroca/.asdf/installs/java/zulu-8.56.0.21/sample/nio/multicast" />
-      <root url="file:////wsl$/Ubuntu/home/pedroca/.asdf/installs/java/zulu-8.56.0.21/sample/nio/server" />
-      <root url="file:////wsl$/Ubuntu/home/pedroca/.asdf/installs/java/zulu-8.56.0.21/sample/scripting/scriptpad/src" />
-      <root url="file:////wsl$/Ubuntu/home/pedroca/.asdf/installs/java/zulu-8.56.0.21/sample/try-with-resources/src" />
-    </SOURCES>
-    <jarDirectory url="file:////wsl$/Ubuntu/home/pedroca/.asdf/installs/java/zulu-8.56.0.21/jre" recursive="false" />
-    <jarDirectory url="file:////wsl$/Ubuntu/home/pedroca/.asdf/installs/java/zulu-8.56.0.21" recursive="false" type="SOURCES" />
+    <SOURCES />
   </library>
 </component>

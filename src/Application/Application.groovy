@@ -1,119 +1,49 @@
 package Application
 
-import Application.model.ListaDeCandidatos
+import Application.DAO.CandidatosDAO
+import Application.DAO.CompetenciaCandidatoDAO
+import Application.DAO.CompetenciasDAO
 import Application.model.PessoaFisica
 import Application.model.PessoaJuridica
-import groovy.json.JsonBuilder
+
 
 class Application {
     static void main(String[] args){
-        List candidatos = [
-                new PessoaFisica("Joao",
-                    "joao@gmail.com",
-                    "111-222-444-55",
-                    24,  "RJ",
-                    "25000-000",
-                    "descricao sample do Joao",
-                    ["Python" : "Avançado", "Java": "Avançado", "Spring Framework" : "Básico", "Angular" : "Intermediario"]),
-                new PessoaFisica("Carlos",
-                    "carlos@gmail.com",
-                    "111-222-444-55",
-                    24,  "RJ",
-                    "25000-000",
-                    "descricao sample do Carlos",
-                    ["Python" : "Avançado", "Java": "Avançado", "Spring Framework" : "Básico", "Angular" : "Intermediario"]),
-                new PessoaFisica("Maria",
-                    "maria@gmail.com",
-                    "111-222-444-55",
-                    24,  "RJ",
-                    "25000-000",
-                    "descricao sample da Maria",
-                    ["Python" : "Avançado", "Java": "Avançado", "Spring Framework" : "Básico", "Angular" : "Intermediario"]),
-                new PessoaFisica("Fernanda",
-                    "fernanda@gmail.com",
-                    "111-222-444-55",
-                    24,  "RJ",
-                    "25000-000",
-                    "descricao sample da Fernanda",
-                    ["Python" : "Avançado", "Java": "Avançado", "Spring Framework" : "Básico", "Angular" : "Intermediario"]),
-                new PessoaFisica("Liana",
-                    "liana@gmail.com",
-                    "111-222-444-55",
-                    24,  "RJ",
-                    "25000-000",
-                    "descricao sample da Liana",
-                    ["Python" : "Avançado", "Java": "Avançado", "Spring Framework" : "Básico", "Angular" : "Intermediario"]),
-        ]
 
-        ListaDeCandidatos listaDeCandidatos = new ListaDeCandidatos(candidatos);
+        PessoaFisica pessoinha = new PessoaFisica("Rafael", "Borges", "rafael.borges@email.com", "11122233345", "1998-12-24", "Brasil", "12345678", "Descricao do rafael")
+        PessoaJuridica pessoao = new PessoaJuridica("Fabrica de Treco LTDA", "fabrica@email.com", "11222333000145", "Brasil", "12345678", "Nos fabricamos coisas e trecos")
+        List<String> listaCompetencias = ["java", "javascript", "typescript", "git", "react"]
 
-        List empresas = [
-                new PessoaJuridica("Farmacia",
-                        "farmacia@empresa.com",
-                        "11.222.333/0001-32",
-                        "Brasil", "SP", "44000-000",
-                        "descricao sample de farmacia",
-                        ["Python" : "Avançado", "Java": "Avançado", "Spring Framework" : "Básico", "Angular" : "Intermediario"]
-                ),
-                new PessoaJuridica("Farmacia",
-                        "farmacia@empresa.com",
-                        "11.222.333/0001-32",
-                        "Brasil", "SP", "44000-000",
-                        "descricao sample de farmacia",
-                        ["Python" : "Avançado", "Java": "Avançado", "Spring Framework" : "Básico", "Angular" : "Intermediario"]
-                ),
-                new PessoaJuridica("Farmacia",
-                        "farmacia@empresa.com",
-                        "11.222.333/0001-32",
-                        "Brasil", "SP", "44000-000",
-                        "descricao sample de farmacia",
-                        ["Python" : "Avançado", "Java": "Avançado", "Spring Framework" : "Básico", "Angular" : "Intermediario"]
-                ),
-                new PessoaJuridica("Farmacia",
-                        "farmacia@empresa.com",
-                        "11.222.333/0001-32",
-                        "Brasil", "SP", "44000-000",
-                        "descricao sample de farmacia",
-                        ["Python" : "Avançado", "Java": "Avançado", "Spring Framework" : "Básico", "Angular" : "Intermediario"]
-                ),
-                new PessoaJuridica("Farmacia",
-                        "farmacia@empresa.com",
-                        "11.222.333/0001-32",
-                        "Brasil", "SP", "44000-000",
-                        "descricao sample de farmacia",
-                        ["Python" : "Avançado", "Java": "Avançado", "Spring Framework" : "Básico", "Angular" : "Intermediario"]
-                ),
-        ]
-        println 'Insira qual instrução deseja realizar: LC - Listar todos candidatos || LE - Listar todas as empresas'
+        println 'Insira qual instrução deseja realizar: LC - Listar todos candidatos || LE - Listar todas as empresas || IC - Inserir Candidato || IE = Inserir Empresa'
         String instrucao = System.in.newReader().readLine()
-        JsonBuilder builder = new JsonBuilder()
         switch(instrucao){
-            case 'LC':
-                builder.candidatos candidatos, {PessoaFisica candidato ->
-                        nome candidato.nome
-                        email candidato.email
-                        cpf candidato.CPF
-                        idade candidato.idade
-                        uf candidato.UF
-                        cep candidato.CEP
-                        descricao candidato.descricao
+            case "IC":
+                CandidatosDAO candidatos = new CandidatosDAO()
+                Long candidato_id = candidatos.insertCandidato(pessoinha)
+                CompetenciasDAO competencias = new CompetenciasDAO()
+                for(competencia in listaCompetencias) {
+                    if(!competencias.searchCompetencia(competencia)) {
+                        competencias.insertCompetencia(competencia)
                     }
+                    List resultado = competencias.searchCompetencia(competencia)
+                    CompetenciaCandidatoDAO competencia_candidato = new CompetenciaCandidatoDAO()
+                    competencia_candidato.insertCompetenciaDoCandidato(candidato_id, resultado[0], "Avançado")
+                }
+                break
+            case 'LC':
 
-                println builder.toPrettyString()
                 break
             case 'LE':
-                builder.empresas empresas, {PessoaJuridica empresa ->
-                    nome empresa.nome
-                    email empresa.email
-                    cnpj empresa.CNPJ
-                    pais empresa.pais
-                    uf empresa.UF
-                    cep empresa.CEP
-                    descricao empresa.descricao
-                }
 
-                println builder.toPrettyString()
                 break
+            case 'IC':
+
+                break
+            case "IE":
+
+                break
+            case "LV":
+
             default:
                 println "comando não reconhecido"
                 break
