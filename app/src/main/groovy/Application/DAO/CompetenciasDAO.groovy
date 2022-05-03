@@ -6,7 +6,7 @@ import java.sql.ResultSet
 
 class CompetenciasDAO extends BDConnect{
 
-    def selectAllCompetencias() {
+    def static selectAllCompetencias() {
         String sql = "SELECT * FROM competencias"
 
         PreparedStatement ps = connection.prepareStatement(sql)
@@ -17,7 +17,7 @@ class CompetenciasDAO extends BDConnect{
         }
     }
 
-    def insertCompetencia(String competencia) {
+    def static insertCompetencia(String competencia) {
         String sql = "INSERT INTO competencias (nome) VALUES (?)"
 
         PreparedStatement ps = connection.prepareStatement(sql)
@@ -26,7 +26,7 @@ class CompetenciasDAO extends BDConnect{
         ps.execute()
     }
 
-    def searchCompetencia(String nome) {
+    def static searchCompetencia(String nome) {
         String sql = "SELECT * FROM competencias WHERE nome=(?)"
         PreparedStatement ps = connection.prepareStatement(sql)
         ps.setString(1, nome)

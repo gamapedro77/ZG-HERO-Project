@@ -4,7 +4,7 @@ import java.sql.PreparedStatement
 
 class CompetenciaCandidatoDAO extends BDConnect{
 
-    def insertCompetenciaDoCandidato(def id_candidato, def id_competencia, String nivel) {
+    def static insertCompetenciaDoCandidato(def id_candidato, def id_competencia, String nivel) {
         String sql = "INSERT INTO candidatos_competencias (id_candidato, id_competencia, nivel) VALUES (?, ?, ?)"
 
 

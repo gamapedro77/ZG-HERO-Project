@@ -1,5 +1,6 @@
 package Application.model
 
+
 import Application.services.IPessoa
 
 class Pessoa implements IPessoa{
@@ -9,5 +10,7 @@ class Pessoa implements IPessoa{
     String CEP
     String descricao
     def competencias
+
+
 
 }

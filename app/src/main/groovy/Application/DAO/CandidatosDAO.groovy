@@ -10,7 +10,7 @@ import java.text.SimpleDateFormat
 
 class CandidatosDAO extends BDConnect{
 
-    def insertCandidato(PessoaFisica pessoa) {
+    def static insertCandidato(PessoaFisica pessoa) {
         String sql = "INSERT INTO candidatos (nome, sobrenome, data_nascimento, email, cpf, pais, cep, descricao, senha) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
 
         PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)
@@ -31,13 +31,14 @@ class CandidatosDAO extends BDConnect{
         if (generatedKey.next()) {
             return generatedKey.getLong(1)
         }
-        return
+        return "Erro ao inserir candidato"
     }
 
-    def selectAllCandidatos() {
+    def static selectAllCandidatos() {
         String sql = "SELECT * FROM candidatos"
         PreparedStatement ps = connection.prepareStatement(sql)
         ResultSet rs = ps.executeQuery()
+        def listaPessoas = []
         while(rs.next()) {
             PessoaFisica candidato = new PessoaFisica(
                     rs.getString("nome"),
@@ -51,7 +52,8 @@ class CandidatosDAO extends BDConnect{
 
             )
 
-            println candidato.nome
+            listaPessoas.add(candidato)
         }
+        return listaPessoas
     }
 }

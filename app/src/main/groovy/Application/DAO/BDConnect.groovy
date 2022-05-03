@@ -7,10 +7,10 @@ import java.sql.ResultSet
 import java.text.SimpleDateFormat
 
 class BDConnect {
-    String DATABASE_URL = "jdbc:postgresql://localhost:5432/aczg"
-    String usuario = "aczg"
-    String senha = "aczg"
-    Connection connection = DriverManager.getConnection(DATABASE_URL, usuario, senha)
+    public static String DATABASE_URL = "jdbc:postgresql://localhost:5432/aczg"
+    public static String usuario = "aczg"
+    public static String senha = "aczg"
+    public static Connection connection = DriverManager.getConnection(DATABASE_URL, usuario, senha)
 
 
 }

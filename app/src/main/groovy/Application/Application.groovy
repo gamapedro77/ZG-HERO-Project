@@ -3,6 +3,7 @@ package Application
 import Application.DAO.CandidatosDAO
 import Application.DAO.CompetenciaCandidatoDAO
 import Application.DAO.CompetenciasDAO
+import Application.model.Competencia
 import Application.model.PessoaFisica
 import Application.model.PessoaJuridica
 
@@ -18,20 +19,15 @@ class Application {
         String instrucao = System.in.newReader().readLine()
         switch(instrucao){
             case "IC":
-                CandidatosDAO candidatos = new CandidatosDAO()
-                Long candidato_id = candidatos.insertCandidato(pessoinha)
-                CompetenciasDAO competencias = new CompetenciasDAO()
-                for(competencia in listaCompetencias) {
-                    if(!competencias.searchCompetencia(competencia)) {
-                        competencias.insertCompetencia(competencia)
-                    }
-                    List resultado = competencias.searchCompetencia(competencia)
-                    CompetenciaCandidatoDAO competencia_candidato = new CompetenciaCandidatoDAO()
-                    competencia_candidato.insertCompetenciaDoCandidato(candidato_id, resultado[0], "Avançado")
-                }
+
+                Long candidato_id = pessoinha.inserirDB()
+                Competencia competencias = new Competencia(listaCompetencias)
+                competencias.inserirCompetencias()
+                println "candidato inserido no id" + candidato_id
                 break
             case 'LC':
-
+                def pessoas = pessoinha.listarTodos()
+                println pessoas
                 break
             case 'LE':
 
