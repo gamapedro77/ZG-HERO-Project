@@ -1,15 +1,21 @@
-package Application.DAO
+package Application.DAO.implementations
 
+import Application.DAO.IDAO
 import Application.model.Candidato
+import Application.model.IModel
+import Application.repositories.IDatabase
 
 import java.sql.PreparedStatement
 import java.sql.ResultSet
 import java.sql.Statement
 import java.text.SimpleDateFormat
 
-class CandidatosDAO {
-    CandidatosDAO(private BDConnect connection){}
-    def insertCandidato(Candidato pessoa) {
+class CandidatosDAO implements IDAO {
+    def connection
+    CandidatosDAO(IDatabase database){
+        this.connection = database.connection
+    }
+    def insert(IModel pessoa) {
         String sql = "INSERT INTO candidatos (nome, sobrenome, data_nascimento, email, cpf, pais, cep, descricao, senha) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
 
         PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)
@@ -32,8 +38,9 @@ class CandidatosDAO {
         }
         return "Erro ao inserir candidato"
     }
+    def delete(Integer id) {}
 
-    def selectAllCandidatos() {
+    def readAll() {
         String sql = "SELECT * FROM candidatos"
         PreparedStatement ps = connection.prepareStatement(sql)
         ResultSet rs = ps.executeQuery()
@@ -55,4 +62,6 @@ class CandidatosDAO {
         }
         return listaPessoas
     }
+
+    def selectById(Integer id) {}
 }

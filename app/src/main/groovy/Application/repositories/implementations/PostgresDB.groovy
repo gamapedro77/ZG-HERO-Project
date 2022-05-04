@@ -1,4 +1,6 @@
-package Application.DAO
+package Application.repositories.implementations
+
+import Application.repositories.IDatabase
 
 import java.sql.Connection
 import java.sql.DriverManager

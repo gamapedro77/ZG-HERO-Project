@@ -3,9 +3,14 @@ package Application.useCases.CreateUser
 import Application.model.Candidato
 
 class CreateUserController{
-    CreateUserController(private CreateUserUseCase CreateUserUseCase) {}
-    handle(Object dados) {
+    def CreateUserUseCase
 
-        CreateUseruseCase.execute(new Candidato(dados as Map))
+    CreateUserController(CreateUserUseCase CreateUserUseCase) {
+        this.CreateUserUseCase = CreateUserUseCase
+    }
+
+    handle(String nome, String sobrenome, String email, String senha) {
+
+        this.CreateUserUseCase.execute(new Candidato(nome, sobrenome, email, senha))
     }
 }

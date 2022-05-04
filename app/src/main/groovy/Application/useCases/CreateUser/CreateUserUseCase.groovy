@@ -4,9 +4,12 @@ import Application.model.Candidato
 import Application.repositories.ICandidatoRepositorio
 
 class CreateUserUseCase {
-    CreateUserUseCase(private ICandidatoRepositorio pessoaRepository) {}
+    def pessoaRepository
+    CreateUserUseCase(ICandidatoRepositorio pessoaRepository) {
+        this.pessoaRepository = pessoaRepository
+    }
 
     def execute(Candidato usuario) {
-        pessoaRepository.save(usuario)
+        this.pessoaRepository.save(usuario)
     }
 }

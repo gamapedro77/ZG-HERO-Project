@@ -1,5 +1,8 @@
 package Application.services
 
+import Application.DAO.implementations.CandidatosDAO
+import Application.repositories.implementations.CandidatoRepository
+import Application.repositories.implementations.PostgresDB
 import Application.useCases.CreateUser.CreateUserController
 import Application.useCases.CreateUser.CreateUserUseCase
 
@@ -18,8 +21,10 @@ class Server {
                 String email = reader.readLine()
                 print "senha: "
                 String senha = reader.readLine()
-                def CreateUserUseCase = new CreateUserUseCase()
-                def CreateUser = new CreateUserController()
+                CandidatoRepository candidatoRepository = new CandidatoRepository(new CandidatosDAO(new PostgresDB()))
+                def CreateUserUseCase = new CreateUserUseCase(candidatoRepository)
+                def CreateUser = new CreateUserController(CreateUserUseCase)
+                CreateUser.handle(nome, sobrenome, email, senha)
                 break
             case 'LC':
 
