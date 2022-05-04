@@ -1,7 +1,7 @@
 package Application.DAO
 
 
-import Application.model.PessoaJuridica
+import Application.model.PessoaJuridicaRepository
 
 import java.sql.PreparedStatement
 import java.sql.ResultSet
@@ -14,7 +14,7 @@ class EmpresasDAO extends BDConnect{
         ResultSet rs = ps.executeQuery()
 
         while(rs.next()) {
-            PessoaJuridica empresa = new PessoaJuridica(rs.getString("nome"),
+            PessoaJuridicaRepository empresa = new PessoaJuridicaRepository(rs.getString("nome"),
                     rs.getString("email"),
                     rs.getString("CNPJ"),
                     rs.getString("pais"),
@@ -25,7 +25,7 @@ class EmpresasDAO extends BDConnect{
         }
     }
 
-    def insertEmpresa(PessoaJuridica pessoa) {
+    def insertEmpresa(PessoaJuridicaRepository pessoa) {
         String sql = "INSERT INTO empresas (nome, cnpj, email, descricao, pais, cep, senha) VALUES (?, ?, ?, ?, ?, ?, ?)"
 
         PreparedStatement ps = connection.prepareStatement(sql)

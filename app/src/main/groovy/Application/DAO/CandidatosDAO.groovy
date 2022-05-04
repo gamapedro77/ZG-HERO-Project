@@ -1,16 +1,15 @@
 package Application.DAO
 
-
-import Application.model.PessoaFisica
+import Application.model.Candidato
 
 import java.sql.PreparedStatement
 import java.sql.ResultSet
 import java.sql.Statement
 import java.text.SimpleDateFormat
 
-class CandidatosDAO extends BDConnect{
-
-    def static insertCandidato(PessoaFisica pessoa) {
+class CandidatosDAO {
+    CandidatosDAO(private BDConnect connection){}
+    def insertCandidato(Candidato pessoa) {
         String sql = "INSERT INTO candidatos (nome, sobrenome, data_nascimento, email, cpf, pais, cep, descricao, senha) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
 
         PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)
@@ -34,13 +33,13 @@ class CandidatosDAO extends BDConnect{
         return "Erro ao inserir candidato"
     }
 
-    def static selectAllCandidatos() {
+    def selectAllCandidatos() {
         String sql = "SELECT * FROM candidatos"
         PreparedStatement ps = connection.prepareStatement(sql)
         ResultSet rs = ps.executeQuery()
         def listaPessoas = []
         while(rs.next()) {
-            PessoaFisica candidato = new PessoaFisica(
+            Candidato candidato = new Candidato(
                     rs.getString("nome"),
                     rs.getString("sobrenome"),
                     rs.getString("email"),
