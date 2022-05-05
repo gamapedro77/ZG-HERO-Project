@@ -9,7 +9,7 @@ import java.sql.PreparedStatement
 class CompetenciaCandidatoDAO implements IDAO{
     def connection
 
-    CompeteiaCandidatoDAO(IDatabase database){
+    CompetenciaCandidatoDAO(IDatabase database){
         this.connection = database.connection
     }
 

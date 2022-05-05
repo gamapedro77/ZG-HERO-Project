@@ -20,6 +20,7 @@ class CandidatoRepository implements ICandidatoRepositorio{
 
 
     def listAll() {
-        return null
+        def candidatos = candidatosDAO.readAll()
+        return candidatos
     }
 }

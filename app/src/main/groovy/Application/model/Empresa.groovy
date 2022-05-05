@@ -1,5 +1,5 @@
 package Application.model
 
-class Empresa implements IUsuario {
+class Empresa implements IModel {
 
 }

@@ -3,7 +3,7 @@ package Application.model
 import groovy.transform.MapConstructor
 
 @MapConstructor
-class Candidato implements IUsuario {
+class Candidato implements IModel {
     def id
     def nome
     def sobrenome

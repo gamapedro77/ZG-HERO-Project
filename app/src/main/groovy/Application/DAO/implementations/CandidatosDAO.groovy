@@ -11,19 +11,20 @@ import java.sql.Statement
 import java.text.SimpleDateFormat
 
 class CandidatosDAO implements IDAO {
+
     def connection
     CandidatosDAO(IDatabase database){
         this.connection = database.connection
     }
+
     def insert(IModel pessoa) {
         String sql = "INSERT INTO candidatos (nome, sobrenome, data_nascimento, email, cpf, pais, cep, descricao, senha) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
 
         PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)
-        java.sql.Date date = new java.sql.Date(new SimpleDateFormat("yyyy-MM-dd").parse(pessoa.data_nascimento).getTime())
 
         ps.setString(1, pessoa.nome)
         ps.setString(2, pessoa.sobrenome)
-        ps.setDate(3, date)
+        ps.setDate(3, pessoa.data_nascimento)
         ps.setString(4, pessoa.email)
         ps.setString(5, pessoa.CPF)
         ps.setString(6, pessoa.pais)
@@ -47,14 +48,14 @@ class CandidatosDAO implements IDAO {
         def listaPessoas = []
         while(rs.next()) {
             Candidato candidato = new Candidato(
-                    rs.getString("nome"),
-                    rs.getString("sobrenome"),
-                    rs.getString("email"),
-                    rs.getString("CPF"),
-                    rs.getString("data_nascimento"),
-                    rs.getString("pais"),
-                    rs.getString("CEP"),
-                    rs.getString("descricao")
+                    nome: rs.getString("nome"),
+                    sobrenome: rs.getString("sobrenome"),
+                    email: rs.getString("email"),
+                    CPF: rs.getString("CPF"),
+                    data_nascimento: rs.getString("data_nascimento"),
+                    pais: rs.getString("pais"),
+                    CEP: rs.getString("CEP"),
+                    descricao: rs.getString("descricao")
 
             )
 
