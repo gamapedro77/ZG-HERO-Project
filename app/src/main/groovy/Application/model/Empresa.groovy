@@ -1,5 +1,15 @@
 package Application.model
 
-class Empresa implements IModel {
+import groovy.transform.MapConstructor
 
+@MapConstructor
+class Empresa implements IModel {
+    def id
+    def nome
+    def email
+    def cnpj
+    def pais
+    def cep
+    def descricao
+    def senha
 }

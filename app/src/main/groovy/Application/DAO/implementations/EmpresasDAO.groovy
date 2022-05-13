@@ -21,12 +21,12 @@ class EmpresasDAO implements IDAO {
         ResultSet rs = ps.executeQuery()
 
         while(rs.next()) {
-            Empresa empresa = new Empresa(rs.getString("nome"),
-                    rs.getString("email"),
-                    rs.getString("CNPJ"),
-                    rs.getString("pais"),
-                    rs.getString("CEP"),
-                    rs.getString("descricao")
+            Empresa empresa = new Empresa(nome: rs.getString("nome"),
+                    email: rs.getString("email"),
+                    cnpj: rs.getString("CNPJ"),
+                    pais: rs.getString("pais"),
+                    cep: rs.getString("CEP"),
+                    descricao: rs.getString("descricao")
             )
             println empresa.nome
         }

@@ -10,4 +10,8 @@ class PostgresDB implements IDatabase {
     public static String usuario = "aczg"
     public static String senha = "admin"
     public static Connection connection = DriverManager.getConnection(DATABASE_URL, usuario, senha)
+
+    PostgresDB() {
+
+    }
 }

@@ -9,7 +9,7 @@ class ListarCandidatosUseCase {
         this.pessoaRepository = pessoaRepository
     }
 
-    def listAll() {
+    def execute() {
         def candidatos = pessoaRepository.listAll()
         return candidatos
     }

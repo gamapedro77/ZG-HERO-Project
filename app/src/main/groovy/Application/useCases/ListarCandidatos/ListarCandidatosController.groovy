@@ -8,7 +8,7 @@ class ListarCandidatosController {
     }
 
     def handle() {
-        def candidatos = listarCandidatosUseCase.listAll()
+        def candidatos = listarCandidatosUseCase.execute()
         return candidatos
     }
 
