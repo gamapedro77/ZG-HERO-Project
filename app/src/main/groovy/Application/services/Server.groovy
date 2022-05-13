@@ -4,9 +4,10 @@ import Application.DAO.implementations.CandidatosDAO
 import Application.DAO.implementations.EmpresasDAO
 import Application.model.Candidato
 import Application.model.Empresa
+import Application.repositories.implementations.PostgresDB
+import Application.repositories.DatabaseFactory
 import Application.repositories.implementations.CandidatoRepository
 import Application.repositories.implementations.EmpresaRepository
-import Application.repositories.implementations.PostgresDB
 import Application.useCases.CreateUser.CreateUserController
 import Application.useCases.CreateUser.CreateUserUseCase
 import Application.useCases.ListarCandidatos.ListarCandidatosController
@@ -19,8 +20,9 @@ class Server {
         println 'Insira qual instrução deseja realizar: LC - Listar todos candidatos || LE - Listar todas as empresas || IC - Inserir Candidato || IE = Inserir Empresa'
         def reader = System.in.newReader()
         String instrucao = reader.readLine()
-        CandidatoRepository candidatoRepository = new CandidatoRepository(new CandidatosDAO(new PostgresDB()))
-        EmpresaRepository empresaRepository = new EmpresaRepository(new EmpresasDAO(new PostgresDB()))
+        PostgresDB postgresdb = DatabaseFactory.getDatabase('postgres')
+        CandidatoRepository candidatoRepository = new CandidatoRepository(new CandidatosDAO(postgresdb))
+        EmpresaRepository empresaRepository = new EmpresaRepository(new EmpresasDAO(postgresdb))
         switch(instrucao) {
             case "IC":
                 print "nome: "
