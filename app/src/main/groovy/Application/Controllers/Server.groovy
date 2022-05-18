@@ -1,4 +1,4 @@
-package Application.services
+package Application.Controllers
 
 import Application.DAO.implementations.CandidatosDAO
 import Application.DAO.implementations.EmpresasDAO
