@@ -1,14 +1,14 @@
 package Application
 
-
-
-import Application.Controllers.Server
+import Application.Server.Rotas
+import Application.Server.Server
 
 
 class Application {
     static void main(String[] args){
 
-        Server.listen()
+        def server = new Server(Rotas.ROUTES)
+        server.startServer()
 
     }
 
