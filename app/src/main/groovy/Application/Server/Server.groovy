@@ -1,9 +1,7 @@
 package Application.Server
 
-import Application.Controllers.ListarCandidatosUseCase
 import io.undertow.Undertow
 import io.undertow.server.HttpHandler
-import io.undertow.server.RoutingHandler
 
 class Server {
         HttpHandler ROUTES

@@ -30,7 +30,7 @@ class CandidatosDAO implements IDAO {
         ps.setString(6, pessoa.pais)
         ps.setString(7, pessoa.CEP)
         ps.setString(8, pessoa.descricao)
-        ps.setString(9, "senhaTemplate")
+        ps.setString(9, pessoa.senha)
         ps.executeUpdate()
 
         ResultSet generatedKey = ps.getGeneratedKeys()
