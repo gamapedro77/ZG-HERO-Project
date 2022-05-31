@@ -8,8 +8,8 @@ class SearchByEmailUseCase {
         this.repository = repository
     }
 
-    def execute() {
-        this.repository.searchByEmail()
+    def execute(String email) {
+        return this.repository.findByEmail(email)
     }
 
 }

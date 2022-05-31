@@ -8,7 +8,7 @@ import Application.repositories.IDatabase
 import java.sql.PreparedStatement
 import java.sql.ResultSet
 import java.sql.Statement
-import java.text.SimpleDateFormat
+
 
 class CandidatosDAO implements IDAO {
 
@@ -47,22 +47,39 @@ class CandidatosDAO implements IDAO {
         ResultSet rs = ps.executeQuery()
         def listaPessoas = []
         while(rs.next()) {
-            Candidato candidato = new Candidato(
-                    nome: rs.getString("nome"),
-                    sobrenome: rs.getString("sobrenome"),
-                    email: rs.getString("email"),
-                    CPF: rs.getString("CPF"),
-                    data_nascimento: rs.getString("data_nascimento"),
-                    pais: rs.getString("pais"),
-                    CEP: rs.getString("CEP"),
-                    descricao: rs.getString("descricao")
-
-            )
-
+            Candidato candidato = createCandidato(rs)
             listaPessoas.add(candidato)
         }
         return listaPessoas
     }
 
     def selectById(Integer id) {}
+
+    def searchByEmail(String email) {
+        String sql = "SELECT * FROM candidatos WHERE email=\'${email}\'"
+        PreparedStatement ps = connection.prepareStatement(sql)
+        ResultSet rs = ps.executeQuery()
+
+        def listaCandidatos = []
+        while(rs.next()) {
+            Candidato candidato = createCandidato(rs)
+            listaCandidatos.add(candidato)
+        }
+        return listaCandidatos
+    }
+
+    def static createCandidato(ResultSet rs) {
+        return new Candidato(
+                id: rs.getInt("id"),
+                nome: rs.getString("nome"),
+                sobrenome: rs.getString("sobrenome"),
+                email: rs.getString("email"),
+                CPF: rs.getString("CPF"),
+                data_nascimento: rs.getString("data_nascimento"),
+                pais: rs.getString("pais"),
+                CEP: rs.getString("CEP"),
+                descricao: rs.getString("descricao")
+
+        )
+    }
 }

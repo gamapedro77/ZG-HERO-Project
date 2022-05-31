@@ -7,8 +7,8 @@ class SearchByEmailController {
         this.searchUseCase = searchUseCase
     }
 
-    def handle() {
+    def handle(String email) {
         // check if user has permissions to execute and then execute
-        searchUseCase.execute()
+        return searchUseCase.execute(email)
     }
 }

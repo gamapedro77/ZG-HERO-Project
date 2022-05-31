@@ -18,7 +18,8 @@ class CandidatoRepository implements ICandidatoRepositorio{
 
 
     def findByEmail(String email) {
-        return null
+        def candidatos = candidatosDAO.searchByEmail(email)
+        return candidatos
     }
 
     def findByCpf(String cpf) {

@@ -30,6 +30,7 @@ class getCandidatoController implements HttpHandler{
         for(Candidato candidato : candidatos) {
             result << JsonOutput.toJson(candidato)
         }
+        exchange.setStatusCode(200)
         exchange.getResponseSender().send("{\"candidatos\": ${result}}")
 
     }
