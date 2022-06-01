@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.codehaus.groovy:groovy-datetime:3.0.9">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.groovy/groovy-datetime/3.0.9/40523a2691c0d8ceceb8ce7cddb0c31066acc480/groovy-datetime-3.0.9.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.groovy/groovy-datetime/3.0.9/f04b2f19a61de1685717a2f772162b3bdcf840b1/groovy-datetime-3.0.9-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
