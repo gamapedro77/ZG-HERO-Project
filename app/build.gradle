@@ -25,6 +25,7 @@ dependencies {
 
     // This dependency is used by the application.
     implementation 'com.google.guava:guava:30.1.1-jre'
+    implementation group: 'com.stijndewitt.undertow.cors', name: 'undertow-cors-filter', version: '0.4.0'
 
     implementation 'org.postgresql:postgresql:42.3.3'
     implementation group: 'io.undertow', name: 'undertow-core', version: '2.2.14.Final'

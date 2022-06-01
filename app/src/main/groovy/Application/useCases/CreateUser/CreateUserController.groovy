@@ -11,17 +11,17 @@ class CreateUserController{
         this.createUserUseCase = CreateUserUseCase
     }
 
-    def handle(String nome, String sobrenome, String email, String senha, String descricao, String CPF, String CEP, String pais, String data) {
-        Date date = Date.valueOf(data)
+    def handle(String nome, String sobrenome, String email, String senha) {
+        Date date = Date.valueOf('2022-02-02')
         this.createUserUseCase.execute(new Candidato(nome: nome,
                 sobrenome: sobrenome,
                 email: email,
                 senha: senha,
                 data_nascimento: date,
-                descricao: descricao,
-                CPF: CPF,
-                CEP: CEP,
-                pais: pais
+                descricao: 'template',
+                CPF: 'template',
+                CEP: 'template',
+                pais: 'template'
         ))
     }
 }

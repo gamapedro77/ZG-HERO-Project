@@ -13,6 +13,7 @@ class Server {
         def startServer() {
             Undertow server = Undertow.builder()
                     .addHttpListener(9999, "localhost", ROUTES).build()
+                    
             server.start()
         }
 

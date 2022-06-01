@@ -1,3 +1,5 @@
+const axios: any = require('axios')
+
 class Home {
   btnCpf: HTMLElement | null = null;
   btnCnpj: HTMLElement | null = null;
@@ -19,6 +21,9 @@ class Home {
     const Nome: string | null = (<HTMLInputElement>(
       document.getElementById("nomeCandidato")
     )).value;
+    const Sobrenome: string | null = (<HTMLInputElement> (
+      document.getElementById("sobrenomeCandidato")
+    )).value;
     const Email: string | null = (<HTMLInputElement>(
       document.getElementById("emailCandidato")
     )).value;
@@ -35,6 +40,7 @@ class Home {
       alert("Nome invalido, Nome deve conter apenas letras");
       return {};
     }
+
 
     const regexEmail: RegExp = /[\w._%+-]+@[\w.-]+\.[a-zA-Z]{1,4}/g;
     if (!Email.match(regexEmail)) {
@@ -69,7 +75,9 @@ class Home {
       ])
     );
 
-    location.href = "localhost:3000/paginas/perfil/candidato.html";
+     console.log(this.postUser({nome: Nome, sobrenome: Sobrenome, email: Email, CPF: CPF, senha: Senha }))
+
+    // location.href = "localhost:3000/paginas/perfil/candidato.html";
 
     return { nome: Nome, Email: Email, CPF: CPF, Senha: Senha };
   }
@@ -128,9 +136,15 @@ class Home {
       ])
     );
 
-    location.href = "localhost:3000/paginas/perfil/empresa.html";
+    // location.href = "localhost:3000/paginas/perfil/empresa.html";
 
     return { nome: Nome, Email: Email, CNPJ: CNPJ, Senha: Senha };
+  }
+
+  postUser(user: Object) {
+
+      axios.post('https://localhost:9999/candidatos', {...user}).then( (res: any) => console.log(res))
+
   }
 }
 

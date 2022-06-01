@@ -10,6 +10,8 @@ import groovy.json.JsonSlurper
 import io.undertow.io.Receiver
 import io.undertow.server.HttpHandler
 import io.undertow.server.HttpServerExchange
+import io.undertow.util.Headers
+import io.undertow.util.HttpString
 import io.undertow.util.StringReadChannelListener
 
 class postCandidatoController implements HttpHandler {
@@ -20,6 +22,8 @@ class postCandidatoController implements HttpHandler {
     @Override
     void handleRequest(HttpServerExchange exchange) throws Exception {
 
+        exchange.getResponseHeaders().put(new HttpString("Access-Control-Allow-Origin"), "*")
+
         exchange.getRequestReceiver().receiveFullBytes(new Receiver.FullBytesCallback() {
             @Override
             void handle(HttpServerExchange innerExchange, byte[] message) {
@@ -27,7 +31,7 @@ class postCandidatoController implements HttpHandler {
                 def data = jsonParser.parseText(new String(message))
                 def CreateUserUseCase = new CreateUserUseCase(candidatoRepository)
                 def CreateUser = new CreateUserController(CreateUserUseCase)
-                CreateUser.handle(data.nome, data.sobrenome, data.email, data.senha)
+                CreateUser.handle(data.nome, data.sobrenome, data.email, data.CPF, data.senha)
             }
         })
 
