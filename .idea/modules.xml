@@ -3,10 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ZG-HERO.iml" filepath="$PROJECT_DIR$/ZG-HERO.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ZG-HERO-Project.iml" filepath="$PROJECT_DIR$/.idea/modules/ZG-HERO-Project.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/ZG-HERO-Project.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/ZG-HERO-Project.app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/ZG-HERO-Project.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/ZG-HERO-Project.app.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/ZG-HERO-Project.app.test.iml" filepath="$PROJECT_DIR$/.idea/modules/app/ZG-HERO-Project.app.test.iml" />
     </modules>
   </component>
 </project>
