@@ -68,6 +68,22 @@ class CandidatosDAO implements IDAO {
         return listaCandidatos
     }
 
+    def update(int id, Map novosValores) {
+        String sql = "UPDATE candidatos SET "
+
+        novosValores.eachWithIndex( (entry, index) -> {
+            if(index > 0) {
+                sql += ", "
+            }
+            sql += "${entry.key} = '${entry.value}'"
+        })
+        sql += " WHERE id=${id}"
+        println sql
+        PreparedStatement ps = connection.prepareStatement(sql)
+        ps.executeUpdate()
+        return "success"
+    }
+
     def static createCandidato(ResultSet rs) {
         return new Candidato(
                 id: rs.getInt("id"),

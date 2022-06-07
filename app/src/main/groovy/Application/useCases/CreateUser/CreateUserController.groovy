@@ -11,7 +11,7 @@ class CreateUserController{
         this.createUserUseCase = CreateUserUseCase
     }
 
-    def handle(String nome, String sobrenome, String email, String senha) {
+    def handle(String nome, String sobrenome, String email, String CPF, String senha) {
         Date date = Date.valueOf('2022-02-02')
         this.createUserUseCase.execute(new Candidato(nome: nome,
                 sobrenome: sobrenome,

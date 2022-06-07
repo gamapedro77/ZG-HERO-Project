@@ -142,8 +142,10 @@ class Home {
   }
 
   postUser(user: Object) {
-
-      axios.post('https://localhost:9999/candidatos', {...user}).then( (res: any) => console.log(res))
+    const headers = new Headers()
+    const res = fetch("http://localhost:9999/candidatos", { method: "POST", body: JSON.stringify(user)}).then( result => result.json().then(result => console.log("dentro do then", result)))
+    return res
+    // axios.post('http://localhost:9999/candidatos', {...user}).then( (res: any) => console.log(res))
 
   }
 }

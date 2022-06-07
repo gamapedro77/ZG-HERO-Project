@@ -10,6 +10,7 @@ import groovy.json.JsonSlurper
 import io.undertow.io.Receiver
 import io.undertow.server.HttpHandler
 import io.undertow.server.HttpServerExchange
+import io.undertow.server.handlers.AccessControlListHandler
 import io.undertow.util.Headers
 import io.undertow.util.HttpString
 import io.undertow.util.StringReadChannelListener
@@ -22,15 +23,22 @@ class postCandidatoController implements HttpHandler {
     @Override
     void handleRequest(HttpServerExchange exchange) throws Exception {
 
+        // exchange.getRequestHeaders().put(new HttpString("Access-Control-Allow-Origin"), "*")
         exchange.getResponseHeaders().put(new HttpString("Access-Control-Allow-Origin"), "*")
 
+        exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "application/json")
         exchange.getRequestReceiver().receiveFullBytes(new Receiver.FullBytesCallback() {
             @Override
             void handle(HttpServerExchange innerExchange, byte[] message) {
+
+                // exchange.getRequestHeaders().put(new HttpString("Access-Control-Allow-Origin"), "*")
+                exchange.getResponseHeaders().put(new HttpString("Access-Control-Allow-Origin"), "*")
+
                 def jsonParser = new JsonSlurper()
                 def data = jsonParser.parseText(new String(message))
                 def CreateUserUseCase = new CreateUserUseCase(candidatoRepository)
                 def CreateUser = new CreateUserController(CreateUserUseCase)
+                println data
                 CreateUser.handle(data.nome, data.sobrenome, data.email, data.CPF, data.senha)
             }
         })

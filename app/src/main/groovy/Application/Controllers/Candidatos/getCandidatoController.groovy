@@ -11,6 +11,7 @@ import groovy.json.JsonOutput
 import io.undertow.server.HttpHandler
 import io.undertow.server.HttpServerExchange
 import io.undertow.util.Headers
+import io.undertow.util.HttpString
 
 class getCandidatoController implements HttpHandler{
 
@@ -19,6 +20,9 @@ class getCandidatoController implements HttpHandler{
 
     @Override
     void handleRequest(HttpServerExchange exchange) throws Exception {
+        exchange.getRequestHeaders().put(new HttpString("Access-Control-Allow-Origin"), "*")
+        exchange.getResponseHeaders().put(new HttpString("Access-Control-Allow-Origin"), "*")
+
         exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "application/json")
 
         def ListarCandidatosUseCase = new ListarCandidatosUseCase(candidatoRepository)

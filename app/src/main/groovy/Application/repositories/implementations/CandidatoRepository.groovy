@@ -26,6 +26,10 @@ class CandidatoRepository implements ICandidatoRepositorio{
 
     }
 
+    def update(int idCandidato, Map novosValores) {
+        candidatosDAO.update(idCandidato, novosValores)
+    }
+
     def listAll() {
         def candidatos = candidatosDAO.readAll()
         return candidatos
