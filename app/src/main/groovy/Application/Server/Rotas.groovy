@@ -4,6 +4,8 @@ import Application.Controllers.Candidatos.getCandidatoByEmailController
 import Application.Controllers.Candidatos.getCandidatoController
 import Application.Controllers.Candidatos.postCandidatoController
 import Application.Controllers.Candidatos.putCandidatoController
+import Application.Controllers.Competencias.postCompetenciaCandidatoController
+import Application.Controllers.Competencias.postCompetenciaController
 import io.undertow.attribute.ExchangeAttribute
 import io.undertow.attribute.ReadOnlyAttributeException
 import io.undertow.server.HttpHandler
@@ -19,7 +21,8 @@ class Rotas {
             .post("/candidatos", new postCandidatoController())
             .get("/candidatos/{email}", new getCandidatoByEmailController())
             .put("/candidatos/{email}", new putCandidatoController())
-            .post("/competencias/{idCandidato}")
+            .post("/competencias", new postCompetenciaController())
+            .post("/competencias/{idCandidato}", new postCompetenciaCandidatoController())
             .post("/vagas/{idEmpresa}")
             .post("/empresas")
 
