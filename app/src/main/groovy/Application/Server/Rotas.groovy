@@ -19,6 +19,9 @@ class Rotas {
             .post("/candidatos", new postCandidatoController())
             .get("/candidatos/{email}", new getCandidatoByEmailController())
             .put("/candidatos/{email}", new putCandidatoController())
+            .post("/competencias/{idCandidato}")
+            .post("/vagas/{idEmpresa}")
+            .post("/empresas")
 
 
 }

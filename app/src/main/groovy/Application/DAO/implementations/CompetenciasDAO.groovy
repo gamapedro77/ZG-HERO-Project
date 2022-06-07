@@ -20,9 +20,11 @@ class CompetenciasDAO implements IDAO{
         PreparedStatement ps = connection.prepareStatement(sql)
 
         ResultSet rs = ps.executeQuery()
+        def competencias = []
         while(rs.next()) {
-            println rs.getString("nome")
+            competencias << rs.getString("nome")
         }
+        return competencias
     }
 
     def insert(IModel competencia) {
