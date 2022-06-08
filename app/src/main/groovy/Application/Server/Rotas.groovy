@@ -6,6 +6,7 @@ import Application.Controllers.Candidatos.postCandidatoController
 import Application.Controllers.Candidatos.putCandidatoController
 import Application.Controllers.Competencias.postCompetenciaCandidatoController
 import Application.Controllers.Competencias.postCompetenciaController
+import Application.Controllers.Empresas.postEmpresaController
 import io.undertow.attribute.ExchangeAttribute
 import io.undertow.attribute.ReadOnlyAttributeException
 import io.undertow.server.HttpHandler
@@ -24,7 +25,7 @@ class Rotas {
             .post("/competencias", new postCompetenciaController())
             .post("/competencias/{idCandidato}", new postCompetenciaCandidatoController())
             .post("/vagas/{idEmpresa}")
-            .post("/empresas")
+            .post("/empresas", new postEmpresaController())
 
 
 }
