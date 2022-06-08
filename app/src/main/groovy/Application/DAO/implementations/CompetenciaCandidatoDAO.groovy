@@ -19,8 +19,8 @@ class CompetenciaCandidatoDAO implements IDAO{
 
         PreparedStatement ps = connection.prepareStatement(sql)
 
-        ps.setLong(1, competencia.id_candidato)
-        ps.setInt(2, competencia.id_competencia)
+        ps.setLong(1, competencia.candidatoId)
+        ps.setInt(2, competencia.competenciaId)
         ps.setString(3, competencia.nivel)
         ps.execute()
     }
