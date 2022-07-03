@@ -5,19 +5,23 @@
     <form [formGroup]="form">
       <mat-form-field appearance="fill">
         <mat-label>Nome</mat-label>
-        <input placeholder="Nome" formControlName="nome" matInput />
+        <input placeholder="Joao Exemplo" formControlName="nome" matInput />
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Email</mat-label>
-        <input placeholder="Email" formControlName="email" matInput />
+        <input
+          placeholder="joao@exemplo.com"
+          formControlName="email"
+          matInput
+        />
       </mat-form-field>
       <mat-form-field *ngIf="isCpfUser" appearance="fill">
         <mat-label>CPF</mat-label>
-        <input placeholder="CPF" formControlName="cpf" matInput />
+        <input placeholder="11122233344" formControlName="cpf" matInput />
       </mat-form-field>
       <mat-form-field *ngIf="!isCpfUser" appearance="fill">
         <mat-label>CNPJ</mat-label>
-        <input placeholder="CNPJ" formControlName="cnpj" matInput />
+        <input placeholder="20817562000104" formControlName="cnpj" matInput />
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Senha</mat-label>
