@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { CandidatosService } from 'src/app/shared/candidatos.service';
+import { CandidatoService } from '../services/candidato.service';
+
 @Component({
   selector: 'app-formulario',
   templateUrl: './formulario.component.html',
@@ -11,16 +12,16 @@ export class FormularioComponent implements OnInit {
   form: FormGroup;
   constructor(
     private formBuilder: FormBuilder,
-    private service: CandidatosService
+    private service: CandidatoService
   ) {
     this.form = this.isCpfUser
-      ? formBuilder.group({
+      ? this.formBuilder.group({
           nome: [null],
           email: [null],
           senha: [null],
           cpf: [null],
         })
-      : formBuilder.group({
+      : this.formBuilder.group({
           nome: [null],
           email: [null],
           senha: [null],
@@ -31,7 +32,7 @@ export class FormularioComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit() {
-    this.service.save(this.form.value);
+    this.service.save(this.form.value).subscribe();
   }
 
   onReturn() {}

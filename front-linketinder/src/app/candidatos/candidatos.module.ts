@@ -12,6 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { FormsModule } from '@angular/forms';
+import { CandidatoService } from './services/candidato.service';
 
 @NgModule({
   declarations: [CadastroComponent, FormularioComponent],
@@ -28,5 +29,6 @@ import { FormsModule } from '@angular/forms';
     MatSlideToggleModule,
     FormsModule,
   ],
+  providers: [CandidatoService],
 })
 export class CandidatosModule {}
