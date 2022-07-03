@@ -1,0 +1,32 @@
+<mat-card>
+  <mat-card-title>Cadastre-se!</mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="form">
+      <mat-form-field appearance="fill">
+        <mat-label>Nome</mat-label>
+        <input placeholder="Nome" formControlName="nome" matInput />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Sobrenome</mat-label>
+        <input placeholder="Sobrenome" formControlName="sobrenome" matInput />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input placeholder="Email" formControlName="email" matInput />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>CPF</mat-label>
+        <input placeholder="CPF" formControlName="cpf" matInput />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Senha</mat-label>
+        <input placeholder="Senha" formControlName="" matInput />
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button mat-raised-button color="accent">Próximo!</button>
+    <button mat-raised-button color="warn">Voltar!</button>
+  </mat-card-actions>
+</mat-card>
