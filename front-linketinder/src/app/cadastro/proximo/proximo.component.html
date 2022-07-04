@@ -1,4 +1,69 @@
 <mat-toolbar color="primary"><span>Continue seu cadastro!</span></mat-toolbar>
 <mat-card>
-  <mat-card-header> </mat-card-header>
+  <mat-card-header>
+    <mat-card-title>Falta pouco!</mat-card-title>
+    <mat-card-subtitle>
+      <p>
+        Agora só precisamos de mais algumas informações para completarmos seu
+        cadastro!
+      </p>
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <form [formGroup]="formDescricao">
+    <mat-form-field appearance="fill"
+      ><mat-label>Data de Nascimento</mat-label>
+      <input matInput [matDatepicker]="picker" />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <input formControlName="dataNascimento" matInput
+    /></mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>País</mat-label>
+      <input formControlName="pais" matInput />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Descrição</mat-label>
+      <textarea class="tall" formControlName="descricao" matInput></textarea>
+      <mat-hint
+        >Fale um pouco sobre você e suas experiências anteriores!</mat-hint
+      >
+    </mat-form-field>
+  </form>
+
+  <form>
+    <mat-form-field appearance="fill">
+      <mat-label>Selecione suas principais habilidades!</mat-label>
+      <mat-chip-list
+        #chipList
+        aria-label="Selecione suas principais habilidades!"
+      >
+        <mat-chip
+          *ngFor="let habilidade of habilidades"
+          (removed)="remove(habilidade)"
+        >
+          {{ habilidade.nome }}
+          <button matChipRemove>
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip>
+        <input
+          placeholder="Nova habilidade..."
+          [matChipInputFor]="chipList"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+          [matChipInputAddOnBlur]="addOnBlur"
+          (matChipInputTokenEnd)="add($event)"
+        />
+      </mat-chip-list>
+    </mat-form-field>
+  </form>
+
+  <mat-card-actions>
+    <button mat-raised-button (click)="onSubmit()" color="primary">
+      Finalizar!
+    </button>
+    <button mat-raised-button (click)="onReturn()" color="accent">
+      Voltar
+    </button>
+  </mat-card-actions>
 </mat-card>
