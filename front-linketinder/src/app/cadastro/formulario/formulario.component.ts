@@ -40,6 +40,9 @@ export class FormularioComponent implements OnInit {
           email: this.form.value.email,
           senha: this.form.value.senha,
           cpf: this.form.value.cpf,
+          dataNascimento: new Date(''),
+          descricao: '',
+          pais: '',
         })
         .subscribe((candidato: Candidato) => {
           this.router.navigate(['cadastro/proximo/candidato', candidato._id]);

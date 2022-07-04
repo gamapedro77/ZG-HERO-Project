@@ -4,4 +4,7 @@ export interface Candidato {
   email: string;
   senha: string;
   cpf: string;
+  dataNascimento: Date;
+  descricao: String;
+  pais: String;
 }

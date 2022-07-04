@@ -17,4 +17,10 @@ export class CandidatoService {
     console.log('ablubluble');
     return this.httpClient.post<Candidato>(this.API, candidato).pipe(first());
   }
+
+  update(candidato: Candidato, candidatoId: string) {
+    return this.httpClient
+      .put<Candidato>(`${this.API}/${candidatoId}`, candidato)
+      .pipe(first());
+  }
 }

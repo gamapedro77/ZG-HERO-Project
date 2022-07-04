@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatChipInputEvent } from '@angular/material/chips';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Competencia } from '../model/competencia';
 import { CompetenciaService } from '../services/competencia.service';
+import { CandidatoService } from '../services/candidato.service';
 
 @Component({
   selector: 'app-proximo',
@@ -19,7 +20,9 @@ export class ProximoComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private competenciaService: CompetenciaService
+    private competenciaService: CompetenciaService,
+    private candidatoService: CandidatoService,
+    private router: Router
   ) {
     this.candidatoId = this.route.snapshot.paramMap.get('candidatoId');
     this.formDescricao = this.formBuilder.group({
@@ -53,12 +56,19 @@ export class ProximoComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log(this.formDescricao.value);
     if (this.candidatoId != null) {
       this.competenciaService.saveCompetenciasCandidato(
         this.candidatoId,
         this.habilidades
       );
+
+      this.candidatoService
+        .update(this.formDescricao.value, this.candidatoId)
+        .subscribe();
     }
+
+    this.router.navigate(['/login']);
   }
   onReturn() {}
 

@@ -13,11 +13,14 @@
   <form [formGroup]="formDescricao">
     <mat-form-field appearance="fill"
       ><mat-label>Data de Nascimento</mat-label>
-      <input matInput [matDatepicker]="picker" />
+      <input
+        formControlName="dataNascimento"
+        matInput
+        [matDatepicker]="picker"
+      />
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
-      <input formControlName="dataNascimento" matInput
-    /></mat-form-field>
+    </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>País</mat-label>
       <input formControlName="pais" matInput />
