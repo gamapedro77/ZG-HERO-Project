@@ -10,7 +10,7 @@ const routes: Routes = [
   {
     path: 'cadastro',
     loadChildren: () =>
-      import('./candidatos/candidatos.module').then((m) => m.CandidatosModule),
+      import('./cadastro/cadastro.module').then((m) => m.CadastroModule),
   },
 ];
 

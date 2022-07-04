@@ -4,7 +4,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CandidatoService } from './candidatos/services/candidato.service';
+import { CandidatoService } from './cadastro/services/candidato.service';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [

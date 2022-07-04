@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { CadastroComponent } from './cadastro/cadastro.component';
-import { CandidatosRoutingModule } from './candidatos-routing.module';
+import { CandidatosRoutingModule } from './cadastro-routing.module';
 import { FormularioComponent } from './formulario/formulario.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
@@ -13,9 +13,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { FormsModule } from '@angular/forms';
 import { CandidatoService } from './services/candidato.service';
+import { ProximoComponent } from './proximo/proximo.component';
 
 @NgModule({
-  declarations: [CadastroComponent, FormularioComponent],
+  declarations: [CadastroComponent, FormularioComponent, ProximoComponent],
   imports: [
     CommonModule,
     CandidatosRoutingModule,
@@ -31,4 +32,4 @@ import { CandidatoService } from './services/candidato.service';
   ],
   providers: [CandidatoService],
 })
-export class CandidatosModule {}
+export class CadastroModule {}

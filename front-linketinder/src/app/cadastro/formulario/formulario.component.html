@@ -1,7 +1,9 @@
 <mat-card>
   <mat-card-title>Cadastre-se!</mat-card-title>
   <mat-card-content>
-    <mat-slide-toggle [(ngModel)]="isCpfUser">CNPJ?</mat-slide-toggle>
+    <mat-slide-toggle color="primary" [(ngModel)]="isCpfUser"
+      >CNPJ?</mat-slide-toggle
+    >
     <form [formGroup]="form">
       <mat-form-field appearance="fill">
         <mat-label>Nome</mat-label>
@@ -36,9 +38,11 @@
   </mat-card-content>
 
   <mat-card-actions>
-    <button mat-raised-button (click)="onSubmit()" color="accent">
+    <button mat-raised-button (click)="onSubmit()" color="primary">
       Próximo!
     </button>
-    <button mat-raised-button (click)="onReturn()" color="warn">Voltar!</button>
+    <button mat-raised-button (click)="onReturn()" color="accent">
+      Já possuo uma conta!
+    </button>
   </mat-card-actions>
 </mat-card>
