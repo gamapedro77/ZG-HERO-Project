@@ -75,6 +75,16 @@
             <optional>true</optional>
         </dependency>
         <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.9.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.kongchen</groupId>
+            <artifactId>swagger-maven-plugin</artifactId>
+            <version>3.1.5</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
@@ -83,6 +93,51 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>com.github.kongchen</groupId>
+                <artifactId>swagger-maven-plugin</artifactId>
+                <version>3.1.5</version>
+                <configuration>
+                    <apiSources>
+                        <apiSource>
+                            <springmvc>true</springmvc>
+                            <location>
+                                <location>com.example.MSCadastro.controller.CandidatoController</location>
+                                <location>com.example.MSCadastro.controller.EmpresaController</location>
+                            </location>
+                            <host>localhost:8080</host>
+                            <basePath>/api</basePath>
+                            <info>
+                                <title>RESTful Api linketinder</title>
+                                <description>RESTful Api com endpoints CRUD para a aplicação linketinder</description>
+                                <termsOfService>Terms of Service</termsOfService>
+                                <contact>
+                                    <name>Pedro Gama</name>
+                                    <url>https://github.com/gamapedro77/</url>
+                                    <email>pedrolucasdgm@gmail.com</email>
+                                </contact>
+                                <license>
+                                    <name>Apache License Version 2.0</name>
+                                    <url>https://www.apache.org/licensen.html</url>
+                                </license>
+                                <version>1.0</version>
+                            </info>
+                            <outputFormats>yaml</outputFormats>
+                            <swaggerDirectory>${basedir}/generated/swagger-ui</swaggerDirectory>
+                            <swaggerFileName>filename.yaml</swaggerFileName>
+                            <outputPath>${basedir}/generated/document.yaml</outputPath>
+                        </apiSource>
+                    </apiSources>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

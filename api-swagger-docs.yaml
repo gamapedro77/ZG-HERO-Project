@@ -1,0 +1,357 @@
+---
+swagger: "2.0"
+info:
+  description: RESTful API used on the development of Linketinder
+  version: "1.0"
+  title: Linketinder API
+  termsOfService: Terms of Service
+  contact:
+    name: Pedro Gama
+    url: https://github.com/gamapedro77
+    email: pedrolucasdgm@gmail.com
+  license:
+    name: Apache License Version 2.0
+    url: https://www.apache.org/licensen.html
+host: localhost:8080
+basePath: "/api"
+tags:
+  - name: Rotas Candidatos
+    description: Endpoints para lidar com Candidatos
+  - name: Rotas Empresas
+    description: Endpoints para lidar com Empresas
+paths:
+  "/candidatos":
+    get:
+      tags:
+        - Rotas Candidatos
+      summary: Retorna uma lista contendo todos os candidatos
+      operationId: listUsingGET
+      produces:
+        - "*/*"
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/Candidato"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+    post:
+      tags:
+        - Rotas Candidatos
+      summary: Cadastra e retorna novo candidato
+      operationId: saveUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - "*/*"
+      parameters:
+        - in: body
+          name: candidato
+          description: candidato
+          required: true
+          schema:
+            "$ref": "#/definitions/Candidato"
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+        "201":
+          description: Created
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  "/candidatos/auth":
+    post:
+      tags:
+        - Rotas Candidatos
+      summary: Autenticar candidato
+      operationId: autenticarUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - "*/*"
+      parameters:
+        - in: body
+          name: credenciais
+          description: credenciais
+          required: true
+          schema:
+            "$ref": "#/definitions/AutenticationDTO"
+      responses:
+        "200":
+          description: OK
+          schema:
+            "$ref": "#/definitions/TokenDTO"
+        "201":
+          description: Created
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  "/candidatos/{candidatoId}":
+    put:
+      tags:
+        - Rotas Candidatos
+      summary: Atualiza o cadastro de um candidato
+      operationId: updateUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - "*/*"
+      parameters:
+        - in: body
+          name: candidato
+          description: candidato
+          required: true
+          schema:
+            "$ref": "#/definitions/Candidato"
+        - name: candidatoId
+          in: path
+          description: candidatoId
+          required: true
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          schema:
+            "$ref": "#/definitions/Candidato"
+        "201":
+          description: Created
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  "/empresas":
+    get:
+      tags:
+        - Rotas Empresas
+      summary: Retorna uma lista contendo todas as empresas
+      operationId: listUsingGET_1
+      produces:
+        - "*/*"
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/Empresa"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+    post:
+      tags:
+        - Rotas Empresas
+      summary: Cadastrar empresa
+      operationId: saveUsingPOST_1
+      consumes:
+        - application/json
+      produces:
+        - "*/*"
+      parameters:
+        - in: body
+          name: empresa
+          description: empresa
+          required: true
+          schema:
+            "$ref": "#/definitions/Empresa"
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+        "201":
+          description: Created
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  "/empresas/auth":
+    post:
+      tags:
+        - Rotas Empresas
+      summary: Autenticar Empresa
+      operationId: autenticarUsingPOST_1
+      consumes:
+        - application/json
+      produces:
+        - "*/*"
+      parameters:
+        - in: body
+          name: credenciais
+          description: credenciais
+          required: true
+          schema:
+            "$ref": "#/definitions/AutenticationDTO"
+      responses:
+        "200":
+          description: OK
+          schema:
+            "$ref": "#/definitions/TokenDTO"
+        "201":
+          description: Created
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  "/empresas/{empresaId}":
+    patch:
+      tags:
+        - Rotas Empresas
+      summary: Atualizar empresa
+      operationId: updateUsingPATCH
+      consumes:
+        - application/json
+      produces:
+        - "*/*"
+      parameters:
+        - name: empresaId
+          in: path
+          description: empresaId
+          required: true
+          type: integer
+          format: int64
+        - in: body
+          name: empresadto
+          description: empresadto
+          required: true
+          schema:
+            "$ref": "#/definitions/EmpresaDto"
+      responses:
+        "200":
+          description: OK
+          schema:
+            "$ref": "#/definitions/Empresa"
+        "204":
+          description: No Content
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      deprecated: false
+definitions:
+  AutenticationDTO:
+    type: object
+    properties:
+      email:
+        type: string
+      senha:
+        type: string
+    title: AutenticationDTO
+  Candidato:
+    type: object
+    properties:
+      _id:
+        type: integer
+        format: int64
+      competencias:
+        type: array
+        items:
+          "$ref": "#/definitions/CandidatoCompetencia"
+      cpf:
+        type: string
+      dataNascimento:
+        type: string
+        format: date
+      descricao:
+        type: string
+      email:
+        type: string
+      nome:
+        type: string
+      pais:
+        type: string
+      senha:
+        type: string
+    title: Candidato
+  CandidatoCompetencia:
+    type: object
+    properties:
+      competencia:
+        "$ref": "#/definitions/Competencia"
+      id:
+        type: integer
+        format: int64
+    title: CandidatoCompetencia
+  Competencia:
+    type: object
+    properties:
+      _id:
+        type: integer
+        format: int64
+      nome:
+        type: string
+    title: Competencia
+  Empresa:
+    type: object
+    properties:
+      _id:
+        type: integer
+        format: int64
+      cnpj:
+        type: string
+      descricao:
+        type: string
+      email:
+        type: string
+      nome:
+        type: string
+      pais:
+        type: string
+    title: Empresa
+  EmpresaDto:
+    type: object
+    properties:
+      cnpj:
+        type: string
+      descricao:
+        type: string
+      email:
+        type: string
+      id:
+        type: integer
+        format: int64
+      nome:
+        type: string
+      pais:
+        type: string
+      senha:
+        type: string
+    title: EmpresaDto
+  TokenDTO:
+    type: object
+    properties:
+      access_token:
+        type: string
+      login:
+        type: string
+    title: TokenDTO

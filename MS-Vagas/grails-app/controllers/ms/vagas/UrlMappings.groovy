@@ -4,7 +4,7 @@ class UrlMappings {
 
     static mappings = {
 
-        post "/vaga/$idempresa(.$format)?"(controller: 'vaga', action: 'save')
+        post "/vagas/$idempresa(.$format)?"(controller: 'vaga', action: 'save')
         get "/vagas/empresa/$id(.$format)?"(controller: 'empresa', action: 'listVagas')
         post "/competencia/$idvaga(.$format)?"(controller: 'competencia', action: 'save')
 

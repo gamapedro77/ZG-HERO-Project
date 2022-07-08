@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.persistence.*;
 
 @Entity
-public class Empresa {
+public class Empresa implements Usuario{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonProperty("_id")

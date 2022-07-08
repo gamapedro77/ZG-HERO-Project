@@ -1,26 +1,47 @@
 package com.example.MSCadastro.controller;
 
+import com.example.MSCadastro.CustomExceptions.EmailAlreadyRegisteredException;
+import com.example.MSCadastro.DTO.AutenticationDTO;
+import com.example.MSCadastro.DTO.TokenDTO;
+import com.example.MSCadastro.config.Encoder;
+import com.example.MSCadastro.config.UsuarioService;
+import com.example.MSCadastro.exceptions.SenhaInvalidaException;
 import com.example.MSCadastro.model.Candidato;
+import com.example.MSCadastro.model.Empresa;
 import com.example.MSCadastro.repository.CandidatoRepository;
+import com.example.MSCadastro.security.jwt.JwtService;
+import com.example.MSCadastro.service.CandidatoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.transaction.Transactional;
 import java.util.List;
 
-@Api(value="API REST Candidatos")
+@Api(tags="Rotas Candidatos", description = "Endpoints para lidar com Candidatos")
 @RestController
 @RequestMapping("/candidatos")
 public class CandidatoController {
 
 
+    private UsuarioService usuarioService;
+    private JwtService jwtService;
     private CandidatoRepository candidatoRepository;
+    private Encoder pwdEncoder;
 
-    public CandidatoController(CandidatoRepository candidatoRepository) {
+    private CandidatoService candidatoService;
+
+    public CandidatoController(CandidatoRepository candidatoRepository, Encoder passwordEncoder, UsuarioService usuarioService, JwtService jwtService, CandidatoService candidatoService) {
         this.candidatoRepository = candidatoRepository;
+        this.pwdEncoder = passwordEncoder;
+        this.usuarioService = usuarioService;
+        this.jwtService = jwtService;
+        this.candidatoService = candidatoService;
     }
     @ApiOperation(value="Retorna uma lista contendo todos os candidatos")
     @GetMapping
@@ -30,8 +51,16 @@ public class CandidatoController {
 
     @ApiOperation(value="Cadastra e retorna novo candidato")
     @PostMapping
-    public ResponseEntity<Candidato> save(@RequestBody Candidato candidato) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(candidatoRepository.save(candidato));
+    public ResponseEntity<Object> save(@RequestBody Candidato candidato) {
+        String senhaCriptografa = pwdEncoder.passwordEncoder().encode(candidato.getSenha());
+        candidato.setSenha(senhaCriptografa);
+        try {
+            return ResponseEntity.status(HttpStatus.CREATED).body(candidatoService.save(candidato));
+        } catch (EmailAlreadyRegisteredException e) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
+        }
+
+
 
     }
 
@@ -51,6 +80,25 @@ public class CandidatoController {
         }
 
         return ResponseEntity.status(HttpStatus.OK).body(candidatoNoDB);
+    }
+
+    @ApiOperation(value = "Autenticar candidato")
+    @PostMapping("/auth")
+    public TokenDTO autenticar(@RequestBody AutenticationDTO credenciais){
+        try {
+            Candidato candidato = new Candidato();
+            candidato.setEmail(credenciais.getEmail());
+            candidato.setSenha(credenciais.getSenha());
+            UserDetails userDetails = usuarioService.autenticar(candidato);
+            String token = jwtService.gerarToken(candidato);
+
+            return new TokenDTO(candidato.getEmail(), token);
+
+
+
+        } catch (UsernameNotFoundException | SenhaInvalidaException e) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());
+        }
     }
 
 }
