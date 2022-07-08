@@ -1,5 +1,7 @@
 buildscript {
     repositories {
+
+
         maven { url "https://repo.grails.org/grails/core" }
     }
     dependencies {
@@ -20,6 +22,8 @@ apply plugin:"org.grails.plugins.views-json"
 
 repositories {
     maven { url "https://repo.grails.org/grails/core" }
+    maven { url "https://jcenter.bintray.com/"}
+    maven { url "https://repo.gradle.org/gradle/libs-releases/"}
 }
 
 configurations {
@@ -30,6 +34,10 @@ configurations {
 }
 
 dependencies {
+    implementation 'io.swagger:swagger-core:1.5.7'
+    implementation 'io.swagger:swagger-jaxrs:1.5.7'
+    implementation "com.github.rahulsom:swaggydoc-commons:0.24.0"
+    implementation 'org.grails.plugins:swaggydoc-grails3:0.28.0'
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     compileOnly "io.micronaut:micronaut-inject-groovy"
     console "org.grails:grails-console"
@@ -45,6 +53,7 @@ dependencies {
     implementation "org.grails:grails-plugin-interceptors"
     implementation "org.grails:grails-plugin-services"
     implementation "org.grails:grails-plugin-datasource"
+    implementation 'org.postgresql:postgresql:42.3.3'
     implementation "org.grails:grails-plugin-databinding"
     implementation "org.grails:grails-web-boot"
     implementation "org.grails:grails-logging"
