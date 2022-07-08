@@ -23,4 +23,6 @@ export class CandidatoService {
       .put<Candidato>(`${this.API}/${candidatoId}`, candidato)
       .pipe(first());
   }
+
+  authenticate(email: String, senha: String) {}
 }

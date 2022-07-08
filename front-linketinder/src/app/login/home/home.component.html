@@ -1,1 +1,35 @@
-<p>yey voce se cadastrou!</p>
+<mat-toolbar color="primary"
+  >Linketinder
+  <button mat-button color="accent" id="button-toolbar" routerLink="/cadastro">
+    Sou novo aqui!
+  </button>
+</mat-toolbar>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Bem Vindo ao Linketinder!</mat-card-title>
+    <mat-card-subtitle
+      >Insira suas informações de login a baixo!</mat-card-subtitle
+    >
+  </mat-card-header>
+  <form [formGroup]="form">
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input placeholder="joao@exemplo.com" formControlName="email" matInput />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Senha</mat-label>
+      <input
+        type="password"
+        placeholder="*********"
+        formControlName="senha"
+        matInput
+      />
+    </mat-form-field>
+  </form>
+
+  <mat-card-actions>
+    <button mat-raised-button (click)="onSubmit()" color="primary">
+      Continuar
+    </button>
+  </mat-card-actions>
+</mat-card>

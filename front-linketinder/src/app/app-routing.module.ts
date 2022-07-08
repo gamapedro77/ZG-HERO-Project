@@ -5,7 +5,7 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'cadastro',
+    redirectTo: 'login',
   },
   {
     path: 'cadastro',
@@ -16,6 +16,16 @@ const routes: Routes = [
     path: 'login',
     loadChildren: () =>
       import('./login/login.module').then((m) => m.LoginModule),
+  },
+  {
+    path: 'candidato',
+    loadChildren: () =>
+      import('./candidato/candidato.module').then((m) => m.CandidatoModule),
+  },
+  {
+    path: 'empresa',
+    loadChildren: () =>
+      import('./empresa/empresa.module').then((m) => m.EmpresaModule),
   },
 ];
 
