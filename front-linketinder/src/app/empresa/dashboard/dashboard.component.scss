@@ -1,0 +1,29 @@
+.side-nav {
+  width: 120px;
+  background-color: #673ab7;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: start;
+  width: 100%;
+  height: 100%;
+}
+span {
+  margin: 0.5em auto;
+  width: fit-content;
+}
+
+.material-icons {
+  font-size: 32px;
+}
+.mat-icon {
+  width: fit-content;
+  height: fit-content;
+}
+
+.mat-divider {
+  border-top-width: 4px;
+}
