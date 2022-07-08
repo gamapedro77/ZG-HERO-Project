@@ -10,7 +10,7 @@ import java.util.List;
 
 @Data
 @Entity
-public class Candidato {
+public class Candidato implements Usuario{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,7 +27,7 @@ public class Candidato {
     private String email;
 
 
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String senha;
 
     private Date dataNascimento;
