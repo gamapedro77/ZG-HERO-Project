@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.transaction.Transactional;
+import javax.ws.rs.QueryParam;
 import java.util.List;
 
 @Api(tags="Rotas Candidatos", description = "Endpoints para lidar com Candidatos")
@@ -47,6 +48,12 @@ public class CandidatoController {
     @GetMapping
     public @ResponseBody List<Candidato> list() {
         return candidatoRepository.findAll();
+    }
+
+    @ApiOperation(value="Busca um candidato por id")
+    @GetMapping(params = "id")
+    public @ResponseBody ResponseEntity<Object> findById(@RequestParam("id") Long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(candidatoRepository.findById(id));
     }
 
     @ApiOperation(value="Cadastra e retorna novo candidato")
