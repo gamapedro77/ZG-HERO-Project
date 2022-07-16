@@ -1,25 +1,28 @@
 package com.linketinder.controller;
 
+import com.linketinder.DTO.CompetenciasList;
+import com.linketinder.model.Candidato;
+
 import com.linketinder.model.Competencia;
-import com.linketinder.model.CompetenciaCandidato;
-import com.linketinder.repository.CompetenciaCandidatoRepository;
+
+import com.linketinder.repository.CandidatoRepository;
 import com.linketinder.repository.CompetenciaRepository;
 import io.micronaut.http.HttpResponse;
-import io.micronaut.http.annotation.Body;
-import io.micronaut.http.annotation.Controller;
-import io.micronaut.http.annotation.Get;
-import io.micronaut.http.annotation.Post;
+import io.micronaut.http.annotation.*;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 
 @Controller("/api/competencias")
 public class CompetenciaController {
 
     private final CompetenciaRepository competenciaRepository;
-    private final CompetenciaCandidatoRepository competenciaCandidatoRepository;
-    public CompetenciaController(CompetenciaRepository competenciaRepository, CompetenciaCandidatoRepository competenciaCandidatoRepository) {
+    private final CandidatoRepository candidatoRepository;
+
+    public CompetenciaController(CompetenciaRepository competenciaRepository, CandidatoRepository candidatoRepository) {
         this.competenciaRepository = competenciaRepository;
-        this.competenciaCandidatoRepository = competenciaCandidatoRepository;
+        this.candidatoRepository = candidatoRepository;
+
     }
 
     @Get
@@ -32,8 +35,18 @@ public class CompetenciaController {
         return competenciaRepository.save(competencia);
     }
 
-    @Post
-    public HttpResponse attachCompetenciaCandidato(@Body CompetenciaCandidato competenciaCandidato) {
-        return HttpResponse.created(competenciaCandidatoRepository.save(competenciaCandidato));
+    @Post("/candidato/{idCandidato}")
+    @Transactional
+    public HttpResponse attachCompetenciaCandidato(@Body ArrayList<Competencia> competencias, @PathVariable Long idCandidato) {
+        if(candidatoRepository.existsById(idCandidato)) {
+            System.out.println(competencias);
+            Candidato candidato = candidatoRepository.findById(idCandidato).get();
+            competencias.forEach(competencia -> {
+                candidato.addCompetencia(competencia);
+            });
+            return HttpResponse.created(candidato);
+        }
+
+        return HttpResponse.badRequest("candidato não existe");
     }
 }
