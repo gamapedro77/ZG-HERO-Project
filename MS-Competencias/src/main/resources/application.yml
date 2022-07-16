@@ -1,0 +1,22 @@
+micronaut:
+  application:
+    name: msCompetencias
+datasources:
+  default:
+    url: jdbc:postgresql://localhost:5432/aczg
+    driverClassName: org.postgresql.Driver
+    username: postgres
+    password: 'admin'
+netty:
+  default:
+    allocator:
+      max-order: 3
+jpa:
+  default:
+    entity-scan:
+      packages: 'com.linketinder.model'
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: update
+        show_sql: true
