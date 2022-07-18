@@ -23,15 +23,34 @@ class CandidatoControllerSpecification extends Specification {
 
     @Autowired
     private MockMvc mvc;
+    @Autowired
+    private CandidatoService candidatoService;
 
-    private CandidatoRepository candidatoRepository = Mock(CandidatoRepository);
+    def "Quando é feito post para /candidatos registra um candidato corretamente no banco"() {
+        given:
+        def request = "{\"nome\": \"teste\", \"email\": \"teste@email.com\", \"cpf\": \"12345678901\", \"senha\": \"123456Abc\"}"
+        when:
+        def result = mvc.perform(MockMvcRequestBuilders
+                .post("/candidatos")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(request)).andReturn()
+        and:
+        def candidato = candidatoService.findByEmail("teste@email.com")
+        then:
+        candidato.getId() != null
+        cleanup:
+        candidatoService.deleteByEmail("teste@email.com")
+    }
 
-    def "Quando é feito get para /candidatos a resposta deve ser status 200 e media type deve ser application json"() {
+    def "Get para /candidatos sem authorization header deve ter resposta status 403"() {
         when:
         def result = mvc.perform(MockMvcRequestBuilders.get("/candidatos")).andReturn()
-        then: "Status é 200 e media type é application json"
-        result.response.status == HttpStatus.OK.value()
-        result.response.contentType == MediaType.APPLICATION_JSON
+        then: "Status é 403"
+        result.response.status == HttpStatus.FORBIDDEN.value()
+
     }
+
+
+
 
 }

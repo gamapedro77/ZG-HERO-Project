@@ -1,6 +1,7 @@
-package com.linketinder.MSCadastro.config;
+package com.linketinder.MSCadastro.service;
 
 import com.linketinder.MSCadastro.CustomExceptions.SenhaInvalidaException;
+import com.linketinder.MSCadastro.config.Encoder;
 import com.linketinder.MSCadastro.model.Candidato;
 import com.linketinder.MSCadastro.model.Empresa;
 import com.linketinder.MSCadastro.model.Usuario;

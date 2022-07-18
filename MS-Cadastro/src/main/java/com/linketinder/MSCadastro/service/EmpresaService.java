@@ -1,5 +1,6 @@
 package com.linketinder.MSCadastro.service;
 
+import com.linketinder.MSCadastro.CustomExceptions.CandidatoNaoEncontradoException;
 import com.linketinder.MSCadastro.CustomExceptions.EmailAlreadyRegisteredException;
 import com.linketinder.MSCadastro.CustomExceptions.MissingRequiredFieldException;
 import com.linketinder.MSCadastro.model.Candidato;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 
 @Service
@@ -21,19 +23,20 @@ public class EmpresaService {
     }
 
     public Empresa save(Empresa empresa) throws Exception {
+        try{
+            checkRequiredParameters(empresa);
+            if(empresaRepository.findByEmail(empresa.getEmail()).isEmpty()) {
+                return empresaRepository.save(empresa);
+            } else {
+                throw new EmailAlreadyRegisteredException();
+            }
+        } catch (Exception e) {
+            throw e;
+        }
 
-        ArrayList<String> parameters = checkRequiredParameters(empresa);
-        if(!parameters.isEmpty()) {
-            throw new MissingRequiredFieldException(parameters);
-        }
-        if(empresaRepository.findByEmail(empresa.getEmail()).isEmpty()) {
-            return empresaRepository.save(empresa);
-        } else {
-            throw new EmailAlreadyRegisteredException();
-        }
     }
 
-    public ArrayList<String> checkRequiredParameters(Empresa empresa) {
+    public ArrayList<String> checkRequiredParameters(Empresa empresa) throws MissingRequiredFieldException {
         //required parameters are senha, email, nome & cnpj
         ArrayList<String> parameters = new ArrayList<>();
 
@@ -50,6 +53,18 @@ public class EmpresaService {
             parameters.add("cnpj");
         }
 
+        if(!parameters.isEmpty()) {
+            throw new MissingRequiredFieldException(parameters);
+        }
         return parameters;
     }
+
+    public Empresa findByEmail(String email) throws Exception {
+        List<Empresa> empresa = empresaRepository.findByEmail(email);
+        if(empresa.isEmpty()) {
+            throw new CandidatoNaoEncontradoException();
+        }
+        return empresa.get(0);
+    }
+
 }

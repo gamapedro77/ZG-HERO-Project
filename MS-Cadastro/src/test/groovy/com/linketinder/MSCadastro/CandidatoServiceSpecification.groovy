@@ -21,6 +21,7 @@ class CandidatoServiceSpecification extends Specification{
         Candidato candidato = new Candidato()
         candidato.setNome("teste")
         candidato.setSenha("senha123")
+        candidato.setCpf("12345678901")
         and: "Um servico com repository injetado"
         candidatoRepository.save(candidato) >> candidato
         CandidatoService candidatoService = new CandidatoService(candidatoRepository);
@@ -35,6 +36,7 @@ class CandidatoServiceSpecification extends Specification{
         Candidato candidato = new Candidato()
         candidato.setNome("teste")
         candidato.setEmail("email@email.com")
+        candidato.setCpf("12345678901")
         and: "Um servico com repository injetado"
         candidatoRepository.save(candidato) >> candidato
         CandidatoService candidatoService = new CandidatoService(candidatoRepository);
@@ -58,5 +60,20 @@ class CandidatoServiceSpecification extends Specification{
         candidatoService.save(candidato);
         then:
         thrown(EmailAlreadyRegisteredException);
+    }
+
+    def "Candidato service save não registra candidato sem CPF"() {
+        given: "Um candidato novo sem cpf"
+        Candidato candidato = new Candidato()
+        candidato.setNome("teste")
+        candidato.setEmail("email@email.com")
+        candidato.setSenha("12345678abc")
+        and: "Um servico com repository injetado"
+        candidatoRepository.save(candidato) >> candidato
+        CandidatoService candidatoService = new CandidatoService(candidatoRepository);
+        when:
+        candidatoService.save(candidato);
+        then:
+        thrown(MissingRequiredFieldException)
     }
 }

@@ -1,11 +1,9 @@
 package com.linketinder.MSCadastro.controller;
 
-import com.linketinder.MSCadastro.CustomExceptions.EmailAlreadyRegisteredException;
-import com.linketinder.MSCadastro.CustomExceptions.MissingRequiredFieldException;
 import com.linketinder.MSCadastro.DTO.AutenticationDTO;
 import com.linketinder.MSCadastro.DTO.TokenDTO;
 import com.linketinder.MSCadastro.config.Encoder;
-import com.linketinder.MSCadastro.config.UsuarioService;
+import com.linketinder.MSCadastro.service.UsuarioService;
 import com.linketinder.MSCadastro.CustomExceptions.SenhaInvalidaException;
 import com.linketinder.MSCadastro.model.Candidato;
 import com.linketinder.MSCadastro.repository.CandidatoRepository;
@@ -88,18 +86,14 @@ public class CandidatoController {
 
     @ApiOperation(value = "Autenticar candidato")
     @PostMapping("/auth")
-    public TokenDTO autenticar(@RequestBody AutenticationDTO credenciais){
+    public ResponseEntity autenticar(@RequestBody AutenticationDTO credenciais){
         try {
             Candidato candidato = new Candidato();
             candidato.setEmail(credenciais.getEmail());
             candidato.setSenha(credenciais.getSenha());
             UserDetails userDetails = usuarioService.autenticar(candidato);
             String token = jwtService.gerarToken(candidato);
-
-            return new TokenDTO(candidato.getEmail(), token);
-
-
-
+            return ResponseEntity.status(HttpStatus.OK).body(new TokenDTO(candidato.getEmail(), token));
         } catch (UsernameNotFoundException | SenhaInvalidaException e) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());
         }

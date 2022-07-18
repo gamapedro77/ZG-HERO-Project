@@ -1,6 +1,7 @@
 package com.linketinder.MSCadastro.service;
 
 
+import com.linketinder.MSCadastro.CustomExceptions.CandidatoNaoEncontradoException;
 import com.linketinder.MSCadastro.CustomExceptions.EmailAlreadyRegisteredException;
 import com.linketinder.MSCadastro.CustomExceptions.MissingRequiredFieldException;
 import com.linketinder.MSCadastro.model.Candidato;
@@ -8,6 +9,7 @@ import com.linketinder.MSCadastro.repository.CandidatoRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class CandidatoService {
@@ -46,5 +48,17 @@ public class CandidatoService {
         }
 
         return parameters;
+    }
+
+    public void deleteByEmail(String email) throws Exception{
+        candidatoRepository.delete(findByEmail(email));
+    }
+
+    public Candidato findByEmail(String email) throws Exception {
+        List<Candidato> candidato = candidatoRepository.findByEmail(email);
+        if(candidato.isEmpty()) {
+            throw new CandidatoNaoEncontradoException();
+        }
+        return candidato.get(0);
     }
 }

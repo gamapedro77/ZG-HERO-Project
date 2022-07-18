@@ -1,11 +1,10 @@
 package com.linketinder.MSCadastro.controller;
 
-import com.linketinder.MSCadastro.CustomExceptions.EmailAlreadyRegisteredException;
 import com.linketinder.MSCadastro.DTO.AutenticationDTO;
 import com.linketinder.MSCadastro.DTO.EmpresaDto;
 import com.linketinder.MSCadastro.DTO.TokenDTO;
 import com.linketinder.MSCadastro.Mapper.EmpresaMapper;
-import com.linketinder.MSCadastro.config.UsuarioService;
+import com.linketinder.MSCadastro.service.UsuarioService;
 import com.linketinder.MSCadastro.CustomExceptions.SenhaInvalidaException;
 import com.linketinder.MSCadastro.model.Empresa;
 import com.linketinder.MSCadastro.repository.EmpresaRepository;
