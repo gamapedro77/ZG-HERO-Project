@@ -8,12 +8,14 @@ grails:
             # Whether to translate GORM events into Reactor events
             # Disabled by default for performance reasons
             events: false
-
 info:
     app:
         name: '@info.app.name@'
         version: '@info.app.version@'
         grailsVersion: '@info.app.grailsVersion@'
+
+server:
+    port: 8181
 spring:
     jmx:
         unique-names: true
@@ -97,7 +99,7 @@ dataSource:
 environments:
     development:
         dataSource:
-            dbCreate: create-drop
+            dbCreate: update
             url: jdbc:postgresql://localhost:5432/aczg
     test:
         dataSource:
@@ -125,10 +127,3 @@ environments:
                 testOnReturn: false
                 jdbcInterceptors: ConnectionState
                 defaultTransactionIsolation: 2 # TRANSACTION_READ_COMMITTED
-
-
-swaggydoc:
-    contact: "developer@coder.com"
-    description: "API Description"
-    title: "My Swagger Doc for my awesome project"
-    apiVersion: "0.2cents"

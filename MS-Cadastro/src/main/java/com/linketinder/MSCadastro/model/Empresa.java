@@ -15,10 +15,8 @@ public class Empresa implements Usuario{
     private String nome;
     @Column(length = 14, nullable = false)
     private String cnpj;
-
-
     private String email;
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String senha;
     private String descricao;
     private String pais;

@@ -1,24 +1,20 @@
 package ms.vagas
 
 import grails.validation.ValidationException
-import io.swagger.annotations.Api
-
-import javax.ws.rs.Path
-
 import static org.springframework.http.HttpStatus.CREATED
 import static org.springframework.http.HttpStatus.NOT_FOUND
 import static org.springframework.http.HttpStatus.NO_CONTENT
 import static org.springframework.http.HttpStatus.OK
+import static org.springframework.http.HttpStatus.UNPROCESSABLE_ENTITY
 
 import grails.gorm.transactions.ReadOnly
 import grails.gorm.transactions.Transactional
 
-@Api(tags="Rotas de Vaga")
-@Path("/vagas")
 @ReadOnly
 class VagaController {
 
     VagaService vagaService
+    EmpresaService empresaService
 
     static responseFormats = ['json', 'xml']
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
@@ -31,7 +27,6 @@ class VagaController {
     def show(Long id) {
         respond vagaService.get(id)
     }
-
 
     @Transactional
     def save(Vaga vaga) {
@@ -55,6 +50,15 @@ class VagaController {
         }
 
         respond vaga, [status: CREATED, view:"show"]
+    }
+
+    def listVagas(Long id) {
+        if (empresaService.get(id)) {
+            respond empresaService.get(id).vaga
+        } else {
+            respond "Não existe vagas registradas para o usuario de id: $id"
+        }
+
     }
 
     @Transactional

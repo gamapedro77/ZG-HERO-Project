@@ -4,18 +4,17 @@ class UrlMappings {
 
     static mappings = {
 
-        post "/vagas/$idempresa(.$format)?"(controller: 'vaga', action: 'save')
-        get "/vagas/empresa/$id(.$format)?"(controller: 'empresa', action: 'listVagas')
-        post "/competencia/$idvaga(.$format)?"(controller: 'competencia', action: 'save')
 
-        delete "/$controller/$id(.$format)?"(action:"delete")
-        get "/$controller(.$format)?"(action:"index")
-        get "/$controller/$id(.$format)?"(action:"show")
-        post "/$controller(.$format)?"(action:"save")
-        put "/$controller/$id(.$format)?"(action:"update")
-        patch "/$controller/$id(.$format)?"(action:"patch")
+        post "/api/vagas/$idempresa(.$format)?"(controller: 'vaga', action: 'save')
+        get "/api/vagas/empresas/$id(.$format)?"(controller: 'vaga', action: 'listVagas')
+        post "/api/vaga/$idvaga/competencias(.$format)?"(controller: 'vaga', action: 'saveCompetencias')
 
-
+        delete "/api/$controller/$id(.$format)?"(action:"delete")
+        get "/api/$controller(.$format)?"(action:"index")
+        get "/api/$controller/$id(.$format)?"(action:"show")
+        post "/api/$controller(.$format)?"(action:"save")
+        put "/api/$controller/$id(.$format)?"(action:"update")
+        patch "/api/$controller/$id(.$format)?"(action:"patch")
 
         "/"(controller: 'application', action:'index')
         "500"(view: '/error')
