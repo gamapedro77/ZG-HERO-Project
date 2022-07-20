@@ -5,10 +5,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-public class LinketinderTrecoApplication {
-
+public class LinketinderApplication {
     public static void main(String[] args) {
-        SpringApplication.run(LinketinderTrecoApplication.class, args);
+        SpringApplication.run(LinketinderApplication.class, args);
     }
 
 }

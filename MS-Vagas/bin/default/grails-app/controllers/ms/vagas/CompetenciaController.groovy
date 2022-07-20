@@ -1,10 +1,6 @@
 package ms.vagas
 
 import grails.validation.ValidationException
-import io.swagger.annotations.Api
-
-import javax.ws.rs.Path
-
 import static org.springframework.http.HttpStatus.CREATED
 import static org.springframework.http.HttpStatus.NOT_FOUND
 import static org.springframework.http.HttpStatus.NO_CONTENT
@@ -13,75 +9,73 @@ import static org.springframework.http.HttpStatus.OK
 import grails.gorm.transactions.ReadOnly
 import grails.gorm.transactions.Transactional
 
-@Api(tags="Rotas de Vaga")
-@Path("/vagas")
 @ReadOnly
-class VagaController {
+class CompetenciaController {
 
-    VagaService vagaService
+    CompetenciaService competenciaService
 
     static responseFormats = ['json', 'xml']
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond vagaService.list(params), model:[vagaCount: vagaService.count()]
+        respond competenciaService.list(params), model:[competenciaCount: competenciaService.count()]
     }
 
     def show(Long id) {
-        respond vagaService.get(id)
+        respond competenciaService.get(id)
     }
 
-
     @Transactional
-    def save(Vaga vaga) {
-        def empresa = Empresa.get(params.idempresa)
+    def save(Competencia competencia) {
 
-        if (vaga == null) {
+        def vaga = Vaga.get(params.idempresa)
+
+        if (competencia == null) {
             render status: NOT_FOUND
             return
         }
-        if (vaga.hasErrors()) {
+        if (competencia.hasErrors()) {
             transactionStatus.setRollbackOnly()
-            respond vaga.errors
+            respond competencia.errors
             return
         }
 
         try {
-            empresa.addToVaga(vaga)
+            vaga.addToCompetencia(competencia)
         } catch (ValidationException e) {
-            respond vaga.errors
+            respond competencia.errors
             return
         }
 
-        respond vaga, [status: CREATED, view:"show"]
+        respond competencia, [status: CREATED, view:"show"]
     }
 
     @Transactional
-    def update(Vaga vaga) {
-        if (vaga == null) {
+    def update(Competencia competencia) {
+        if (competencia == null) {
             render status: NOT_FOUND
             return
         }
-        if (vaga.hasErrors()) {
+        if (competencia.hasErrors()) {
             transactionStatus.setRollbackOnly()
-            respond vaga.errors
+            respond competencia.errors
             return
         }
 
         try {
-            vagaService.save(vaga)
+            competenciaService.save(competencia)
         } catch (ValidationException e) {
-            respond vaga.errors
+            respond competencia.errors
             return
         }
 
-        respond vaga, [status: OK, view:"show"]
+        respond competencia, [status: OK, view:"show"]
     }
 
     @Transactional
     def delete(Long id) {
-        if (id == null || vagaService.delete(id) == null) {
+        if (id == null || competenciaService.delete(id) == null) {
             render status: NOT_FOUND
             return
         }

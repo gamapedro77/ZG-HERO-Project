@@ -12,7 +12,7 @@ import spock.lang.Specification
 
 @ComponentScan(basePackages = ["com.linketinder.MSCadastro"])
 @SpringBootTest
-class CandidatoServiceSpecification extends Specification{
+class CandidatoServiceSpecification extends Specification {
 
     private CandidatoRepository candidatoRepository = Mock()
 

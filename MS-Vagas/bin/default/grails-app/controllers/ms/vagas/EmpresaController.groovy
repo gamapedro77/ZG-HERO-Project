@@ -1,87 +1,88 @@
 package ms.vagas
 
 import grails.validation.ValidationException
-import io.swagger.annotations.Api
-
-import javax.ws.rs.Path
-
 import static org.springframework.http.HttpStatus.CREATED
 import static org.springframework.http.HttpStatus.NOT_FOUND
 import static org.springframework.http.HttpStatus.NO_CONTENT
 import static org.springframework.http.HttpStatus.OK
+import static org.springframework.http.HttpStatus.UNPROCESSABLE_ENTITY
 
 import grails.gorm.transactions.ReadOnly
 import grails.gorm.transactions.Transactional
 
-@Api(tags="Rotas de Vaga")
-@Path("/vagas")
 @ReadOnly
-class VagaController {
+class EmpresaController {
 
-    VagaService vagaService
+    EmpresaService empresaService
 
     static responseFormats = ['json', 'xml']
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond vagaService.list(params), model:[vagaCount: vagaService.count()]
+        respond empresaService.list(params), model:[empresaCount: empresaService.count()]
     }
 
     def show(Long id) {
-        respond vagaService.get(id)
+        respond empresaService.get(id)
     }
 
+    def listVagas(Long id) {
+        if (empresaService.get(id)) {
+            respond empresaService.get(id).vaga
+        } else {
+            respond "Não existe vagas registradas para o usuario de id: $id"
+        }
+
+    }
 
     @Transactional
-    def save(Vaga vaga) {
-        def empresa = Empresa.get(params.idempresa)
-
-        if (vaga == null) {
+    def save(Empresa empresa) {
+        if (empresa == null) {
             render status: NOT_FOUND
             return
         }
-        if (vaga.hasErrors()) {
+        if (empresa.hasErrors()) {
             transactionStatus.setRollbackOnly()
-            respond vaga.errors
+            respond empresa.errors
             return
         }
 
         try {
-            empresa.addToVaga(vaga)
+            empresaService.save(empresa)
         } catch (ValidationException e) {
-            respond vaga.errors
+            respond empresa.errors
             return
         }
 
-        respond vaga, [status: CREATED, view:"show"]
+        respond empresa, [status: CREATED, view:"show"]
     }
 
     @Transactional
-    def update(Vaga vaga) {
-        if (vaga == null) {
+    def update(Empresa empresa) {
+        if (empresa == null) {
             render status: NOT_FOUND
             return
         }
-        if (vaga.hasErrors()) {
+        if (empresa.hasErrors()) {
             transactionStatus.setRollbackOnly()
-            respond vaga.errors
+            respond empresa.errors
             return
         }
 
         try {
-            vagaService.save(vaga)
+            empresaService.save(empresa)
         } catch (ValidationException e) {
-            respond vaga.errors
+            respond empresa.errors
             return
         }
 
-        respond vaga, [status: OK, view:"show"]
+        respond empresa, [status: OK, view:"show"]
     }
 
     @Transactional
     def delete(Long id) {
-        if (id == null || vagaService.delete(id) == null) {
+        if (id == null || empresaService.delete(id) == null) {
             render status: NOT_FOUND
             return
         }
