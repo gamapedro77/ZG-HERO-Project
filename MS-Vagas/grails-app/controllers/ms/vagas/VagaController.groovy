@@ -15,6 +15,7 @@ class VagaController {
 
     VagaService vagaService
     EmpresaService empresaService
+    KafkaSender kafkaSender = new KafkaSender();
 
     static responseFormats = ['json', 'xml']
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
@@ -44,11 +45,13 @@ class VagaController {
 
         try {
             empresa.addToVaga(vaga)
+
         } catch (ValidationException e) {
             respond vaga.errors
             return
         }
 
+        kafkaSender.sendRecord(vaga)
         respond vaga, [status: CREATED, view:"show"]
     }
 

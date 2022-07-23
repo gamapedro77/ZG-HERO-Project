@@ -1,14 +1,12 @@
 micronaut:
-  server:
-    port: 8383
   application:
     name: msCompetencias
 datasources:
   default:
-    url: jdbc:postgresql://db:5432/aczg
+    url: jdbc:postgresql://localhost:5432/aczg
     driverClassName: org.postgresql.Driver
     username: postgres
-    password: "admin"
+    password: 'admin'
 netty:
   default:
     allocator:
@@ -16,7 +14,7 @@ netty:
 jpa:
   default:
     entity-scan:
-      packages: "com.linketinder.model"
+      packages: 'com.linketinder.model'
     properties:
       hibernate:
         hbm2ddl:

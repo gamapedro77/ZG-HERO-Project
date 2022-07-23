@@ -13,5 +13,10 @@ class Vaga {
         static mapping = {
                 version false
         }
+
+        @Override
+        public String toString() {
+                return "{\"nome\": \"$nome\", \"descricao\": \"$descricao\", \"local\": \"$local\"}"
+        }
 }
 

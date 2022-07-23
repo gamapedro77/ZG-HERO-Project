@@ -3,7 +3,6 @@ package com.linketinder.MSCadastro.controller;
 import com.linketinder.MSCadastro.DTO.AutenticationDTO;
 import com.linketinder.MSCadastro.DTO.EmpresaDto;
 import com.linketinder.MSCadastro.DTO.TokenDTO;
-import com.linketinder.MSCadastro.Mapper.EmpresaMapper;
 import com.linketinder.MSCadastro.service.UsuarioService;
 import com.linketinder.MSCadastro.CustomExceptions.SenhaInvalidaException;
 import com.linketinder.MSCadastro.model.Empresa;
@@ -61,16 +60,16 @@ public class EmpresaController {
     @Transactional
     @PatchMapping("/{empresaId}")
     public ResponseEntity<Empresa> update(@RequestBody EmpresaDto empresadto, @PathVariable Long empresaId) {
-        Empresa empresa = EmpresaMapper.INSTANCE.toEmpresa(empresadto);
+        
         Empresa empresaNoBd = empresaRepository.findById(empresaId).get();
-        if (empresa.getNome() != null) {
-            empresaNoBd.setNome(empresa.getNome());
+        if (empresadto.getNome() != null) {
+            empresaNoBd.setNome(empresadto.getNome());
         }
-        if (empresa.getDescricao() != null) {
-            empresaNoBd.setDescricao(empresa.getDescricao());
+        if (empresadto.getDescricao() != null) {
+            empresaNoBd.setDescricao(empresadto.getDescricao());
         }
-        if (empresa.getEmail() != null) {
-            empresaNoBd.setEmail(empresa.getEmail());
+        if (empresadto.getEmail() != null) {
+            empresaNoBd.setEmail(empresadto.getEmail());
         }
         return ResponseEntity.status(HttpStatus.OK).body(empresaNoBd);
     }
